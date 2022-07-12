@@ -1,4 +1,5 @@
-import { FiltersGroupObj } from '../types/types';
+import { FiltersGroupObj, Callback } from '../types/types';
+import { FiltersC } from '../controller';
 
 export class FiltersV {
     filtersHTML;
@@ -10,6 +11,7 @@ export class FiltersV {
         this.filtersHTML.classList.add('filters');
         //this.filtersHTML.setAttribute('id', 'filters');
 
+
         filters.forEach((item) => {
             const groupContainer = document.createElement('div');
             groupContainer.textContent = item.filtersGroupName;
@@ -20,10 +22,17 @@ export class FiltersV {
                 input.setAttribute('id', field.id);
 
                 const attrKeys = Object.keys(field.filterAttrs);
-
                 attrKeys.forEach((attr) => {
                     input.setAttribute(attr, field.filterAttrs[attr]);
                 });
+
+                if(field.filterType === 'checkbox' && field.state === 'on'){
+                    input.setAttribute('checked', 'checked');
+                }
+
+                if(field.filterType === 'range' && field.state){
+                    input.setAttribute('value', field.state);
+                }
 
                 groupContainer.append(input);
 
@@ -33,23 +42,24 @@ export class FiltersV {
           });
 
 
-        this.filtersHTML.addEventListener('change', (event) => this.filtersHandlers(event))
+
 
         return this.filtersHTML;
         //document.body.prepend(this.filtersHTML);
     }
 
-    filtersHandlers(event: Event) {
-        console.log(event);
 
+    listenFilters(handler: Callback){
+        this.filtersHTML.addEventListener('change', (event) => {
+            console.log(event);
 
+            if (!event.target) throw new Error();
 
-        //if (!event.target) throw new Error();
-        //const changedInput = event.target as HTMLElement;
+            const changedInputId = (event.target as HTMLInputElement).id;
+            const changedInputValue = (event.target as HTMLInputElement).value;
 
-        // найти в фильтрах такой id
-        //this.filtersHTML.forEach
-
-        // rerender products
+            handler(changedInputId, changedInputValue);
+            }
+        )
     }
 }

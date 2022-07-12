@@ -3,20 +3,52 @@ import { FiltersV } from './view/filtersv';
 import { FiltersGroupObj } from './types/types';
 import { PageV } from './view/pagev';
 
-class FiltersC {
+export class FiltersC {
     filtersModel = new FiltersM;
     filtersView = new FiltersV;
     filtersHTML: Element;
+    filters: Array<FiltersGroupObj>;
 
     constructor(){
-        const filters = this.arrangeFilters(this.filtersModel.filters); // do smth in controller
-        this.filtersHTML = this.filtersView.render(filters); // render html in view
+        //this.filters = this.arrangeFilters(this.filtersModel.filters);
+        this.filters = this.filtersModel.filters;
+        this.filtersHTML = this.filtersView.render(this.filters);
+
+        this.filtersView.listenFilters(this.handleFilters);
+
     }
 
     arrangeFilters(filters: Array<FiltersGroupObj>){
-        //this.filtersView.render(filters);
+        // some logic
         return filters;
     }
+
+    // arrow here to keep 'this'
+    handleFilters = (id: string, value: string): void => {
+        console.log(id, value);
+
+        for(const group of this.filters){
+            for(const filter of group.filters){
+                if (filter.id === id){
+
+                    switch(filter.state){
+                        case 'off': filter.state = 'on';
+                            break;
+                        case 'on': filter.state = 'off';
+                            break;
+                        default:
+                            filter.state = value;
+                    }
+                }
+            }
+        }
+
+        console.log(this.filters);
+
+        // отрисовать все заново
+
+    }
+
 }
 
 

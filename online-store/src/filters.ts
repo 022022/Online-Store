@@ -8,6 +8,7 @@ export const filtersConfig: Array<FiltersGroupObj> = [
             {
                 filterType: "range",
                 id: "releaseDate", // must be the same as in products json
+                state: '2021',
                 filterAttrs: {
                     min: "2016",   // .setAttribute
                     step: "1",
@@ -24,11 +25,12 @@ export const filtersConfig: Array<FiltersGroupObj> = [
             {
                 id: "quantity", // must be the same as in products json
                 filterType: "range",
+                state: '8',
                 filterAttrs: {
                     min: "0",   // .setAttribute
                     step: "1",
                     max: "10",
-                    value: "3",
+                    value: "1",
                 }
             },
         ]
@@ -40,6 +42,7 @@ export const filtersConfig: Array<FiltersGroupObj> = [
             {
                 id: "brand-huawei", // must be the same as in products json
                 filterType: "checkbox",
+                state: 'off',
                 filterAttrs: {
                     name: "huawei",
                 }
@@ -47,6 +50,7 @@ export const filtersConfig: Array<FiltersGroupObj> = [
             {
                 id: "brand-apple", // must be the same as in products json
                 filterType: "checkbox",
+                state: 'off',
                 filterAttrs: {
                     name: "apple",
                 }
@@ -60,6 +64,7 @@ export const filtersConfig: Array<FiltersGroupObj> = [
             {
                 id: "color-red", // must be the same as in products json
                 filterType: "checkbox",
+                state: 'off',
                 filterAttrs: {
                     name: "color-red",
                 }
@@ -67,6 +72,7 @@ export const filtersConfig: Array<FiltersGroupObj> = [
             {
                 id: "color-black", // must be the same as in products json
                 filterType: "checkbox",
+                state: 'off',
                 filterAttrs: {
                     name: "color-black",
                 }
