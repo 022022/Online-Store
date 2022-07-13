@@ -14,4 +14,8 @@ export class FiltersM {
     saveToLocalStorage(data: string){
         localStorage.setItem('filters', data);
     }
+
+    removeFromLocalStorage(name: string){
+        localStorage.removeItem(name);
+    }
 }

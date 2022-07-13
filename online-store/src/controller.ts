@@ -15,6 +15,7 @@ export class FiltersC {
         this.filtersHTML = this.filtersView.render(this.filters);
 
         this.filtersView.listenFilters(this.handleFilters);
+        this.filtersView.listenResetFilters(this.resetFilters);
 
     }
 
@@ -47,6 +48,11 @@ export class FiltersC {
 
         this.filtersModel.saveToLocalStorage(JSON.stringify(this.filters));
 
+        new PageC;
+    }
+
+    resetFilters = ():void => {
+        this.filtersModel.removeFromLocalStorage('filters');
         new PageC;
     }
 

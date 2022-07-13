@@ -1,4 +1,4 @@
-import { FiltersGroupObj, Callback } from '../types/types';
+import { FiltersGroupObj, Callback, CallbackLocalStorage } from '../types/types';
 import { FiltersC } from '../controller';
 
 export class FiltersV {
@@ -41,7 +41,10 @@ export class FiltersV {
             this.filtersHTML.append(groupContainer);
           });
 
-
+        const resetButton = document.createElement('button');
+        resetButton.setAttribute('id', 'reset-filters');
+        resetButton.innerText = 'Reset';
+        this.filtersHTML.append(resetButton);
 
         return this.filtersHTML;
         //document.body.prepend(this.filtersHTML);
@@ -60,4 +63,15 @@ export class FiltersV {
             }
         )
     }
+
+    listenResetFilters(handler: CallbackLocalStorage){
+        this.filtersHTML.addEventListener('click', (event) => {
+                if (!event.target) throw new Error();
+                if ((event.target as HTMLInputElement).id === 'reset-filters'){
+                    handler();
+                }
+            }
+        )
+    }
+
 }
