@@ -38,9 +38,8 @@ export class FiltersV {
 
             })
 
-            this.filtersHTML.appendChild(groupContainer);
+            this.filtersHTML.append(groupContainer);
           });
-
 
 
 
@@ -51,7 +50,6 @@ export class FiltersV {
 
     listenFilters(handler: Callback){
         this.filtersHTML.addEventListener('change', (event) => {
-            console.log(event);
 
             if (!event.target) throw new Error();
 

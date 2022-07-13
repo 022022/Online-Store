@@ -17,3 +17,7 @@ export interface AttrsObj {
 export interface Callback {
     (id: string, value: string): void;
 }
+
+export interface CallbackLocalStorage {
+    (): void;
+}

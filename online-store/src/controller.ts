@@ -18,12 +18,11 @@ export class FiltersC {
 
     }
 
-    arrangeFilters(filters: Array<FiltersGroupObj>){
+    //arrangeFilters(filters: Array<FiltersGroupObj>){
         // some logic
-        return filters;
-    }
+    //    return filters;
+    //}
 
-    // arrow here to keep 'this'
     handleFilters = (id: string, value: string): void => {
         console.log(id, value);
 
@@ -43,10 +42,12 @@ export class FiltersC {
             }
         }
 
+        ////////////////////////////////////////
         console.log(this.filters);
 
-        // отрисовать все заново
+        this.filtersModel.saveToLocalStorage(JSON.stringify(this.filters));
 
+        new PageC;
     }
 
 }
@@ -55,14 +56,15 @@ export class FiltersC {
 class PageC {
     filters = new FiltersC;
 
-    page = new PageV;
+    pageView = new PageV;
 
     constructor(){
         const filtersHTML = this.filters.filtersHTML;
-
         const productsHTML = document.createElement('div');
-        this.page.renderWholePage(filtersHTML, productsHTML);
+        this.pageView.renderWholePage(filtersHTML, productsHTML);
     }
+
+
 }
 
 

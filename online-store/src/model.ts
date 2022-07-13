@@ -1,8 +1,17 @@
 import { filtersConfig } from './filters';
+import { FiltersGroupObj } from './types/types';
 
 export class FiltersM {
     filters;
     constructor(){
-        this.filters = filtersConfig;
+        const filters = localStorage.getItem('filters');
+
+        if (!filters) throw new Error();
+
+        this.filters = JSON.parse(filters) || filtersConfig;
+    }
+
+    saveToLocalStorage(data: string){
+        localStorage.setItem('filters', data);
     }
 }

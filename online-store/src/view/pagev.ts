@@ -1,3 +1,5 @@
+import { CallbackLocalStorage } from '../types/types';
+
 export class PageV {
 
     header;
@@ -11,10 +13,15 @@ export class PageV {
             <button>Total Reset</button>
         </div>
     </header>`
+
+     //
+
     }
 
 
     renderWholePage(filtersHTML: Element, productsHTML: Element) {
+
+        (document.querySelector('body') as Element).innerHTML = '';
 
         const header = document.createElement('header');
         header.innerHTML = this.header;
