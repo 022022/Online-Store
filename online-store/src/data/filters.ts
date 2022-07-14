@@ -1,4 +1,4 @@
-import { FiltersGroupObj } from './types/types';
+import { FiltersGroupObj } from '../types/types';
 
 
 export const filtersConfig: Array<FiltersGroupObj> = [
@@ -7,10 +7,10 @@ export const filtersConfig: Array<FiltersGroupObj> = [
         filters: [
             {
                 filterType: "range",
-                id: "releaseDate", // must be the same as in products json
+                id: "releaseDate",
                 state: '2021',
                 filterAttrs: {
-                    min: "2016",   // .setAttribute
+                    min: "2016",
                     step: "1",
                     max: "2021",
                     value: "2021",
@@ -23,11 +23,11 @@ export const filtersConfig: Array<FiltersGroupObj> = [
         filtersGroupName: "Quantity",
         filters: [
             {
-                id: "quantity", // must be the same as in products json
+                id: "quantity",
                 filterType: "range",
                 state: '8',
                 filterAttrs: {
-                    min: "0",   // .setAttribute
+                    min: "0",
                     step: "1",
                     max: "10",
                     value: "1",
@@ -40,7 +40,7 @@ export const filtersConfig: Array<FiltersGroupObj> = [
         filtersGroupName: "Brand",
         filters: [
             {
-                id: "brand-huawei", // must be the same as in products json
+                id: "brand-huawei",
                 filterType: "checkbox",
                 state: 'off',
                 filterAttrs: {
@@ -48,7 +48,7 @@ export const filtersConfig: Array<FiltersGroupObj> = [
                 }
             },
             {
-                id: "brand-apple", // must be the same as in products json
+                id: "brand-apple",
                 filterType: "checkbox",
                 state: 'off',
                 filterAttrs: {
@@ -62,7 +62,7 @@ export const filtersConfig: Array<FiltersGroupObj> = [
         filtersGroupName: "Color",
         filters: [
             {
-                id: "color-red", // must be the same as in products json
+                id: "color-red",
                 filterType: "checkbox",
                 state: 'off',
                 filterAttrs: {
@@ -70,7 +70,7 @@ export const filtersConfig: Array<FiltersGroupObj> = [
                 }
             },
             {
-                id: "color-black", // must be the same as in products json
+                id: "color-black", 
                 filterType: "checkbox",
                 state: 'off',
                 filterAttrs: {

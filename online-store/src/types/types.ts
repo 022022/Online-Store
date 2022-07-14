@@ -21,3 +21,8 @@ export interface Callback {
 export interface CallbackLocalStorage {
     (): void;
 }
+
+
+export interface ProductsObj{
+    [key: string]: string;
+}

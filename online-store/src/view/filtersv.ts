@@ -3,8 +3,10 @@ import { FiltersC } from '../controller';
 
 export class FiltersV {
     filtersHTML;
+    resetButton;
     constructor(){
         this.filtersHTML = document.createElement('div');
+        this.resetButton = document.createElement('button');
     }
 
     render(filters: Array<FiltersGroupObj>){
@@ -41,10 +43,10 @@ export class FiltersV {
             this.filtersHTML.append(groupContainer);
           });
 
-        const resetButton = document.createElement('button');
-        resetButton.setAttribute('id', 'reset-filters');
-        resetButton.innerText = 'Reset';
-        this.filtersHTML.append(resetButton);
+
+        this.resetButton.setAttribute('id', 'reset-filters');
+        this.resetButton.innerText = 'Reset';
+        this.filtersHTML.append(this.resetButton);
 
         return this.filtersHTML;
         //document.body.prepend(this.filtersHTML);
@@ -64,8 +66,9 @@ export class FiltersV {
         )
     }
 
+
     listenResetFilters(handler: CallbackLocalStorage){
-        this.filtersHTML.addEventListener('click', (event) => {
+        this.resetButton.addEventListener('click', (event: Event) => {
                 if (!event.target) throw new Error();
                 if ((event.target as HTMLInputElement).id === 'reset-filters'){
                     handler();
@@ -73,5 +76,6 @@ export class FiltersV {
             }
         )
     }
+
 
 }
