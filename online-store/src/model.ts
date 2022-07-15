@@ -8,12 +8,14 @@ export class FiltersM {
         this.filters = JSON.parse(savedFilters) || filtersConfig;
     }
 
-    saveToLocalStorage(data: string){
+    saveToLocalStorage(){
+        const data = JSON.stringify(this.filters);
         localStorage.setItem('app-filters', data);
+
     }
 
-    removeFromLocalStorage(name: string){
-        localStorage.removeItem(name);
+    removeFromLocalStorage(){
+        localStorage.removeItem('app-filters');
     }
 }
 
@@ -24,11 +26,11 @@ export class ProductsM {
         this.products = JSON.parse(savedProducts) || productsConfig;
     }
 
-    saveToLocalStorage(data: string){
-        localStorage.setItem('app-products', data);
-    }
+    //saveToLocalStorage(data: string){
+    //    localStorage.setItem('app-products', data);
+    //}
 
-    removeFromLocalStorage(name: string){
-        localStorage.removeItem(name);
-    }
+    //removeFromLocalStorage(name: string){
+    //    localStorage.removeItem(name);
+    //}
 }

@@ -48,7 +48,15 @@ export const filtersConfig: Array<FiltersGroupObj> = [
                 }
             },
             {
-                id: "brand-apple",
+                id: "brand-lenovo",
+                filterType: "checkbox",
+                state: 'off',
+                filterAttrs: {
+                    name: "apple",
+                }
+            },
+            {
+                id: "brand-xiaomi",
                 filterType: "checkbox",
                 state: 'off',
                 filterAttrs: {
@@ -70,11 +78,65 @@ export const filtersConfig: Array<FiltersGroupObj> = [
                 }
             },
             {
-                id: "color-black", 
+                id: "color-black",
                 filterType: "checkbox",
                 state: 'off',
                 filterAttrs: {
                     name: "color-black",
+                }
+            },
+            {
+                id: "color-blue",
+                filterType: "checkbox",
+                state: 'off',
+                filterAttrs: {
+                    name: "color-blue",
+                }
+            },
+            {
+                id: "color-green",
+                filterType: "checkbox",
+                state: 'off',
+                filterAttrs: {
+                    name: "color-green",
+                }
+            },
+            {
+                id: "color-pink",
+                filterType: "checkbox",
+                state: 'off',
+                filterAttrs: {
+                    name: "color-pink",
+                }
+            },
+        ]
+    },
+
+    {
+        filtersGroupName: "Band Material",
+        filters: [
+            {
+                id: "bandmaterial-plastic",
+                filterType: "checkbox",
+                state: 'off',
+                filterAttrs: {
+                    name: "bandmaterial-plastic",
+                }
+            },
+            {
+                id: "bandmaterial-silicone",
+                filterType: "checkbox",
+                state: 'off',
+                filterAttrs: {
+                    name: "bandmaterial-silicone",
+                }
+            },
+            {
+                id: "bandmaterial-rubber",
+                filterType: "checkbox",
+                state: 'off',
+                filterAttrs: {
+                    name: "bandmaterial-rubber",
                 }
             },
         ]

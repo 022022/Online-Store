@@ -61,6 +61,8 @@ export class FiltersV {
             const changedInputId = (event.target as HTMLInputElement).id;
             const changedInputValue = (event.target as HTMLInputElement).value;
 
+            console.log(changedInputId, changedInputValue);
+
             handler(changedInputId, changedInputValue);
             }
         )
@@ -71,6 +73,7 @@ export class FiltersV {
         this.resetButton.addEventListener('click', (event: Event) => {
                 if (!event.target) throw new Error();
                 if ((event.target as HTMLInputElement).id === 'reset-filters'){
+
                     handler();
                 }
             }

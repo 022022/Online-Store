@@ -5,12 +5,14 @@ import { FiltersGroupObj, ProductsObj } from './types/types';
 import { PageV } from './view/pagev';
 
 export class FiltersC {
-    filtersModel = new FiltersM;
-    filtersView = new FiltersV;
+    filtersModel;
+    filtersView;
     filtersHTML: Element;
     filters: Array<FiltersGroupObj>;
 
     constructor(){
+        this.filtersModel = new FiltersM;
+        this.filtersView = new FiltersV;
         //this.filters = this.arrangeFilters(this.filtersModel.filters);
         this.filters = this.filtersModel.filters;
         this.filtersHTML = this.filtersView.render(this.filters);
@@ -26,11 +28,13 @@ export class FiltersC {
     //}
 
     handleFilters = (id: string, value: string): void => {
-        console.log(id, value);
+
 
         for(const group of this.filters){
             for(const filter of group.filters){
                 if (filter.id === id){
+
+                    console.log('c', filter.id);
 
                     switch(filter.state){
                         case 'off': filter.state = 'on';
@@ -44,13 +48,16 @@ export class FiltersC {
             }
         }
 
-        this.filtersModel.saveToLocalStorage(JSON.stringify(this.filters));
+        //this.filtersModel.saveToLocalStorage(JSON.stringify(this.filters));
+
+        this.filtersModel.filters = this.filters;
+        this.filtersModel.saveToLocalStorage();
 
         new PageC;
     }
 
     resetFilters = () => {
-        this.filtersModel.removeFromLocalStorage('filters');
+        //this.filtersModel.removeFromLocalStorage();
         new PageC;
     }
 
@@ -69,42 +76,43 @@ export class ProductsC {
     }
 
     arrangeProducts(filters: Array<FiltersGroupObj>, products: Array<ProductsObj>){
-        console.log(filters, products);
+        let productsTemp = products;
 
-        //let appliedFilters: Array<string>;
-
-        let result = [];
-
-        for(const group of filters){
-
-
-
-            for(const filter of group.filters){
+        for(let i = 0; i < filters.length; i++){ // length is how many groups
+            let result = []; // result for a group of filters
+            for(const filter of filters[i].filters){
                 switch(filter.filterType){
 
-                    case 'checkbox':
 
+                    case 'checkbox':
                         if (filter.state ==='on') {
+
                             const key = filter.id.split('-')[0].toLowerCase();
                             const value = filter.id.split('-')[1].toLowerCase();
 
-                            const filtered = products.filter(item => item.hasOwnProperty(key) && item[key] === value); // []
-                            result.push(...filtered);
-                        }
+                            console.log('arrange', key, value);
 
+                            const filteredProducts = productsTemp.filter(item => item.hasOwnProperty(key) && item[key] === value); // []
+                            console.log('filteredProducts', filteredProducts);
+                            result.push(...filteredProducts);
+                        }
                         break;
                     case 'range': // todo
                         break;
                 }
+            }
 
+            console.log(result);
 
+            if (result.length !== 0){
+                productsTemp = result;
             }
         }
 
-        return result;
+        return productsTemp;
     }
 
-    getHTML(arrangedProducts: Array<ProductsObj>){
+    getHTML(arrangedProducts: Array<ProductsObj>)   {
         const productsView = new ProductsV(arrangedProducts);
         return productsView.productsHTML;
     }
@@ -113,18 +121,24 @@ export class ProductsC {
 
 
 class PageC {
-    filters = new FiltersC;
-    products = new ProductsC;
-
-    pageView = new PageV;
+    filters;
+    products;
+    pageView;
 
     constructor(){
+
+        this.filters = new FiltersC;
+        this.products = new ProductsC;
+        this.pageView = new PageV;
+
         const filtersHTML = this.filters.filtersHTML;
 
         const arrangedProducts = this.products.arrangeProducts(this.filters.filters, this.products.products); // []
         const productsHTML = this.products.getHTML(arrangedProducts);
 
         this.pageView.renderWholePage(filtersHTML, productsHTML);
+
+        //console.log(localStorage.getItem('app-filters'), this.filters.filters, this.products.products);
     }
 
 
