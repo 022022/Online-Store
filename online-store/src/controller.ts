@@ -34,7 +34,7 @@ export class FiltersC {
             for(const filter of group.filters){
                 if (filter.id === id){
 
-                    console.log('c', filter.id);
+                    //console.log('c', filter.id);
 
                     switch(filter.state){
                         case 'off': filter.state = 'on';
@@ -57,10 +57,9 @@ export class FiltersC {
     }
 
     resetFilters = () => {
-        //this.filtersModel.removeFromLocalStorage();
-        new PageC;
+        this.filtersModel.removeFromLocalStorage();
+        location.reload();
     }
-
 }
 
 
@@ -90,10 +89,10 @@ export class ProductsC {
                             const key = filter.id.split('-')[0].toLowerCase();
                             const value = filter.id.split('-')[1].toLowerCase();
 
-                            console.log('arrange', key, value);
+                            //console.log('arrange', key, value);
 
                             const filteredProducts = productsTemp.filter(item => item.hasOwnProperty(key) && item[key] === value); // []
-                            console.log('filteredProducts', filteredProducts);
+                            //console.log('filteredProducts', filteredProducts);
                             result.push(...filteredProducts);
                         }
                         break;
@@ -102,7 +101,7 @@ export class ProductsC {
                 }
             }
 
-            console.log(result);
+            //console.log(result);
 
             if (result.length !== 0){
                 productsTemp = result;
@@ -129,6 +128,7 @@ class PageC {
 
         this.filters = new FiltersC;
         this.products = new ProductsC;
+
         this.pageView = new PageV;
 
         const filtersHTML = this.filters.filtersHTML;
@@ -138,7 +138,6 @@ class PageC {
 
         this.pageView.renderWholePage(filtersHTML, productsHTML);
 
-        //console.log(localStorage.getItem('app-filters'), this.filters.filters, this.products.products);
     }
 
 

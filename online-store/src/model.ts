@@ -22,15 +22,6 @@ export class FiltersM {
 export class ProductsM {
     products;
     constructor(){
-        const savedProducts = localStorage.getItem('app-products') as string;
-        this.products = JSON.parse(savedProducts) || productsConfig;
+        this.products = productsConfig;
     }
-
-    //saveToLocalStorage(data: string){
-    //    localStorage.setItem('app-products', data);
-    //}
-
-    //removeFromLocalStorage(name: string){
-    //    localStorage.removeItem(name);
-    //}
 }

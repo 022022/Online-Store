@@ -14,7 +14,7 @@ export interface AttrsObj {
     [key: string]: string;
 }
 
-export interface Callback {
+export interface CallbackHandleFilters {
     (id: string, value: string): void;
 }
 
