@@ -1,3 +1,5 @@
+import '../assets/css/style.css';
+
 import { FiltersM, ProductsM } from './model';
 import { FiltersV } from './view/filtersv';
 import { ProductsV } from './view/productsv';
@@ -125,7 +127,6 @@ class PageC {
     pageView;
 
     constructor(){
-
         this.filters = new FiltersC;
         this.products = new ProductsC;
 
@@ -133,14 +134,11 @@ class PageC {
 
         const filtersHTML = this.filters.filtersHTML;
 
-        const arrangedProducts = this.products.arrangeProducts(this.filters.filters, this.products.products); // []
+        const arrangedProducts = this.products.arrangeProducts(this.filters.filters, this.products.products);
         const productsHTML = this.products.getHTML(arrangedProducts);
 
         this.pageView.renderWholePage(filtersHTML, productsHTML);
-
     }
-
-
 }
 
 
