@@ -77,13 +77,16 @@ export class ProductsC {
     }
 
     arrangeProducts(filters: Array<FiltersGroupObj>, products: Array<ProductsObj>){
+
+       // const filteredProducts = products.filter(item => {
+        //}
+
         let productsTemp = products;
 
         for(let i = 0; i < filters.length; i++){ // length is how many groups
             let result = []; // result for a group of filters
             for(const filter of filters[i].filters){
                 switch(filter.filterType){
-
 
                     case 'checkbox':
                         if (filter.state ==='on') {
@@ -105,7 +108,7 @@ export class ProductsC {
 
             //console.log(result);
 
-            if (result.length !== 0){
+            if (result.length !== 0) {
                 productsTemp = result;
             }
         }

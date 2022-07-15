@@ -13,6 +13,7 @@ body {
     gap: 2rem;
     font-size: 1.8rem;
     line-height: 130%;
+    align-content: flex-start;
 }
 
 .product {
@@ -49,7 +50,7 @@ body {
     align-items: center;
 }
 
-.product__button {
+.button {
     outline: none;
     cursor: pointer;
     border-radius: 500px;
@@ -64,7 +65,43 @@ body {
     background-color: transparent;
 }
 
-.product__button:hover {
+
+
+.button:hover {
     color: #fff;
     background-color: rgb(100 102 82);
+}
+
+main {
+    display: flex;
+    gap: 5rem;
+}
+
+.filters {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    font-size: 1.6rem;
+    min-width: 20rem;
+}
+
+.group__name {
+    margin-bottom: 1rem;
+    font-weight: bold;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+    margin-bottom: 2rem;
+    border-bottom: 2px solid #d1d3c1;
+    align-items: center;
+}
+
+h1 {
+    color: #61634b;
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
 }

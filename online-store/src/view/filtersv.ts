@@ -16,12 +16,19 @@ export class FiltersV {
 
         filters.forEach((item) => {
             const groupContainer = document.createElement('div');
-            groupContainer.textContent = item.filtersGroupName;
+            groupContainer.setAttribute('class', 'filters__group');
+            groupContainer.innerHTML = `<div class="group__name"> ${item.filtersGroupName} <div>` ;
 
             item.filters.forEach((field) => {
+                const wrapper = document.createElement('div');
+
                 const input = document.createElement('input');
                 input.setAttribute('type', field.filterType);
                 input.setAttribute('id', field.id);
+
+                const label = document.createElement('label');
+                label.setAttribute('for', field.id);
+                label.innerHTML = field.id.split('-')[1];
 
                 const attrKeys = Object.keys(field.filterAttrs);
                 attrKeys.forEach((attr) => {
@@ -36,7 +43,11 @@ export class FiltersV {
                     input.setAttribute('value', field.state);
                 }
 
-                groupContainer.append(input);
+                wrapper.append(input);
+                wrapper.append(label);
+
+                groupContainer.append(wrapper);
+
 
             })
 
@@ -45,6 +56,7 @@ export class FiltersV {
 
 
         this.resetButton.setAttribute('id', 'reset-filters');
+        this.resetButton.setAttribute('class', 'button');
         this.resetButton.innerText = 'Reset';
         this.filtersHTML.append(this.resetButton);
 

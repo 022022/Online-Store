@@ -152,7 +152,7 @@ export const productsConfig = [
         brand: 'huawei',
         color: 'red',
         url: 'HuaweiBand6-red',
-        bandmaterial: 'silicone',
+        bandmaterial: 'rubber',
         released: '2020',
         inStock: '11',
     },

@@ -6,13 +6,13 @@ export class PageV {
 
     constructor() {
         this.header = `
-    <header>
-        <h1>Smart Bands </h1>
-        <div class="favorites">icon</div>
+
+        <h1>Smart Bands Store</h1>
+        <div class="favorites">0 items in Favorites</div>
         <div class="controls">
-            <button>Total Reset</button>
+            <button class="button">Total Reset</button>
         </div>
-    </header>`
+    `
 
      //
 

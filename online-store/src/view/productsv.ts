@@ -37,7 +37,7 @@ export class ProductsV {
 
                 </div>
 
-                <button class="product__button">Add to Cart</button>
+                <button class="button">Add to Cart</button>
             </div>
 
             </div>
