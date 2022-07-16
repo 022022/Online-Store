@@ -78,27 +78,20 @@ export class ProductsC {
 
     arrangeProducts(filters: Array<FiltersGroupObj>, products: Array<ProductsObj>){
 
-       // const filteredProducts = products.filter(item => {
-        //}
+        let filtersGroupsOfConditions = [];
 
-        let productsTemp = products;
-
-        for(let i = 0; i < filters.length; i++){ // length is how many groups
-            let result = []; // result for a group of filters
-            for(const filter of filters[i].filters){
+        for(const group of filters){
+            let conditionsGroup = [];
+            for(const filter of group.filters){
                 switch(filter.filterType){
-
                     case 'checkbox':
                         if (filter.state ==='on') {
 
                             const key = filter.id.split('-')[0].toLowerCase();
                             const value = filter.id.split('-')[1].toLowerCase();
 
-                            //console.log('arrange', key, value);
-
-                            const filteredProducts = productsTemp.filter(item => item.hasOwnProperty(key) && item[key] === value); // []
-                            //console.log('filteredProducts', filteredProducts);
-                            result.push(...filteredProducts);
+                            const obj = {[key]: value};
+                            conditionsGroup.push(obj);
                         }
                         break;
                     case 'range': // todo
@@ -106,11 +99,24 @@ export class ProductsC {
                 }
             }
 
-            //console.log(result);
+            filtersGroupsOfConditions.push(conditionsGroup);
+        }
 
-            if (result.length !== 0) {
-                productsTemp = result;
-            }
+        let productsTemp = products;
+
+        for (const conditionsGroup of filtersGroupsOfConditions) {
+            if(conditionsGroup.length === 0) continue;
+
+            const filteredProductsByGroup = productsTemp.filter((product) => {
+                for(const condition of conditionsGroup){
+                    console.log('condition', condition);
+                    if(product[Object.keys(condition)[0]] === Object.values(condition)[0]){
+                        return true;
+                    }
+                }
+            })
+            productsTemp = filteredProductsByGroup;
+
         }
 
         return productsTemp;
