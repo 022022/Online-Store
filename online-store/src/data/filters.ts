@@ -3,11 +3,11 @@ import { FiltersGroupObj } from '../types/types';
 
 export const filtersConfig: Array<FiltersGroupObj> = [
     {
-        filtersGroupName: "Release date",
+        filtersGroupName: "Released",
         filters: [
             {
                 filterType: "range",
-                id: "releasedate",
+                id: "released",
                 state: '2021',
                 filterAttrs: {
                     min: "2016",
@@ -21,10 +21,10 @@ export const filtersConfig: Array<FiltersGroupObj> = [
     },
 
     {
-        filtersGroupName: "Quantity",
+        filtersGroupName: "In Stock",
         filters: [
             {
-                id: "quantity",
+                id: "instock",
                 filterType: "range",
                 state: '8',
                 filterAttrs: {
@@ -54,7 +54,7 @@ export const filtersConfig: Array<FiltersGroupObj> = [
                 filterType: "checkbox",
                 state: 'off',
                 filterAttrs: {
-                    name: "apple",
+                    name: "lenovo",
                 }
             },
             {
@@ -62,7 +62,7 @@ export const filtersConfig: Array<FiltersGroupObj> = [
                 filterType: "checkbox",
                 state: 'off',
                 filterAttrs: {
-                    name: "apple",
+                    name: "xiaomi",
                 }
             },
         ]

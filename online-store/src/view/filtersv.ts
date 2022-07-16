@@ -17,7 +17,7 @@ export class FiltersV {
         filters.forEach((item) => {
             const groupContainer = document.createElement('div');
             groupContainer.setAttribute('class', 'filters__group');
-            groupContainer.innerHTML = `<div class="group__name"> ${item.filtersGroupName} <div>` ;
+            groupContainer.innerHTML = `<div class="group__name"> ${item.filtersGroupName} </div>` ;
 
             item.filters.forEach((field) => {
                 const wrapper = document.createElement('div');
@@ -42,11 +42,16 @@ export class FiltersV {
                         }
 
                         wrapper.append(input, label);
-                        //wrapper.append(label);
+
 
                     break;
 
                     case 'range':
+
+                        groupContainer.innerHTML = `
+                            <div class="group__name"> ${item.filtersGroupName}:
+                                <span class="accented-text">${field.filterAttrs.valueFrom} - ${field.filterAttrs.valueTo}</span>
+                            </div>`;
 
                         wrapper.setAttribute('class', 'slider-wrapper');
                         wrapper.setAttribute('id', `${field.id}`);
@@ -94,15 +99,13 @@ export class FiltersV {
         this.resetButton.innerText = 'Reset';
         this.filtersHTML.append(this.resetButton);
 
-        this.listenSliderToFillItQuickly();
+        this.listenSliderToDrawMove();
 
         return this.filtersHTML;
 
     }
 
     fillSliderFromTo(inputFrom: HTMLInputElement, inputTo:HTMLInputElement) {
-
-        console.log('fillinng');
 
         const min = Number(inputFrom.min);
         const max = Number(inputFrom.max);
@@ -124,12 +127,17 @@ export class FiltersV {
     }
 
 
-    listenSliderToFillItQuickly(){
+    listenSliderToDrawMove(){
         const sliderWrappers = this.filtersHTML.querySelectorAll('.slider-wrapper');
         sliderWrappers.forEach(wrapper =>
             wrapper.addEventListener('input', (event) => {
                 const from = (wrapper.children[0] as HTMLInputElement);
                 const to = (wrapper.children[1] as HTMLInputElement);
+
+                if (Number(from.value) > Number(to.value)){
+                    from.value = to.value;
+                }
+
                 this.fillSliderFromTo(from, to);
                 }
             )
@@ -148,7 +156,6 @@ export class FiltersV {
                 case 'checkbox':
                     const changedInputId = (event.target as HTMLInputElement).id;
                     const changedInputValue = (event.target as HTMLInputElement).value;
-                    //console.log(changedInputId, changedInputValue);
                     handler(changedInputId, changedInputValue);
 
                 break;

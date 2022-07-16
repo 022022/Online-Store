@@ -84,7 +84,10 @@ export class ProductsC {
 
     arrangeProducts(filters: Array<FiltersGroupObj>, products: Array<ProductsObj>){
 
+    // 1)get simpler version of filters data structure - array of objects with only checked checkboxes
         let filtersGroupsOfConditions = [];
+
+        let rangeFilters = [];
 
         for(const group of filters){
             let conditionsGroup = [];
@@ -100,8 +103,8 @@ export class ProductsC {
                             conditionsGroup.push(obj);
                         }
                         break;
-                    case 'range': // todo
-
+                    case 'range':
+                        rangeFilters.push( [filter.id, filter.filterAttrs.valueFrom, filter.filterAttrs.valueTo] );
 
                         break;
                 }
@@ -110,24 +113,53 @@ export class ProductsC {
             filtersGroupsOfConditions.push(conditionsGroup);
         }
 
-        let productsTemp = products;
+     console.log('filtersGroupsOfConditions', filtersGroupsOfConditions);
+     console.log('rangeFilters', rangeFilters);
+
+    // 2) filter by checkboxes
+    // [Object.keys(condition)[0]] === checkbox id
+
+        let productsFilteredByCheckboxes = products;
 
         for (const conditionsGroup of filtersGroupsOfConditions) {
             if(conditionsGroup.length === 0) continue;
 
-            const filteredProductsByGroup = productsTemp.filter((product) => {
+            const filteredProductsByGroup = productsFilteredByCheckboxes.filter((product) => {
                 for(const condition of conditionsGroup){
 
-                    if(product[Object.keys(condition)[0]] === Object.values(condition)[0]){
+                    if (product[Object.keys(condition)[0]] === Object.values(condition)[0]){
                         return true;
                     }
                 }
             })
-            productsTemp = filteredProductsByGroup;
-
+            productsFilteredByCheckboxes = filteredProductsByGroup;
         }
 
-        return productsTemp;
+        // now all checkboxes filters have been applied
+        // rangeFilters = array of arrays [id, from, to]
+
+        let productsFilteredByRanges = productsFilteredByCheckboxes;
+
+        for(const rangeFilter of rangeFilters){
+            const productsTemp = productsFilteredByRanges.filter((product) => {
+                const id = rangeFilter[0];
+                const from = Number(rangeFilter[1]);
+                const to = Number(rangeFilter[2]);
+                console.log('id, from, to', id, from, to);
+                console.log(product[id]);
+
+                const value = Number(product[id]);
+                console.log('value', value);
+
+                if (value >= from && value <= to){
+                    return true;
+                }
+            });
+            productsFilteredByRanges = productsTemp;
+        }
+
+        return productsFilteredByRanges;
+
     }
 
     getHTML(arrangedProducts: Array<ProductsObj>)   {
@@ -151,10 +183,10 @@ class PageC {
 
         const filtersHTML = this.filters.filtersHTML;
 
-        console.log(this.filters.filters);
-
         const arrangedProducts = this.products.arrangeProducts(this.filters.filters, this.products.products);
         const productsHTML = this.products.getHTML(arrangedProducts);
+
+        console.log(this.filters.filters, this.products.products);
 
         this.pageView.renderWholePage(filtersHTML, productsHTML);
     }

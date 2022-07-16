@@ -37,7 +37,7 @@ export class ProductsV {
             </div>
             <div class="product__footer">
                 <div>
-                ${product.inStock} in stock
+                ${product.instock} in stock
 
                 </div>
 

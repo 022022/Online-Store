@@ -6,7 +6,7 @@ export const productsConfig = [
         url: 'xiaomi-mi-band-2-black',
         bandmaterial: 'silicone',
         released: '2016',
-        inStock: '11',
+        instock: '12',
     },
     {
         name: 'Mi Band 2',
@@ -15,7 +15,7 @@ export const productsConfig = [
         url: 'xiaomi-mi-band-2-blue',
         bandmaterial: 'silicone',
         released: '2016',
-        inStock: '11',
+        instock: '11',
     },
     {
         name: 'Mi Band 2',
@@ -24,7 +24,7 @@ export const productsConfig = [
         url: 'xiaomi-mi-band-2-green',
         bandmaterial: 'silicone',
         released: '2016',
-        inStock: '11',
+        instock: '10',
     },
     {
         name: 'Mi Band 2',
@@ -33,7 +33,7 @@ export const productsConfig = [
         url: 'xiaomi-mi-band-2-black',
         bandmaterial: 'plastic',
         released: '2016',
-        inStock: '11',
+        instock: '9',
     },
     {
         name: 'Mi Band 2',
@@ -42,7 +42,7 @@ export const productsConfig = [
         url: 'xiaomi-mi-band-2-blue',
         bandmaterial: 'plastic',
         released: '2016',
-        inStock: '11',
+        instock: '9',
     },
     {
         name: 'Mi Band 2',
@@ -51,7 +51,7 @@ export const productsConfig = [
         url: 'xiaomi-mi-band-2-green',
         bandmaterial: 'plastic',
         released: '2016',
-        inStock: '11',
+        instock: '8',
     },
 
     {
@@ -61,7 +61,7 @@ export const productsConfig = [
         url: 'xiaomi-mi-band-3-black',
         bandmaterial: 'plastic',
         released: '2018',
-        inStock: '11',
+        instock: '7',
     },
     {
         name: 'Mi Band 3',
@@ -70,7 +70,7 @@ export const productsConfig = [
         url: 'xiaomi-mi-band-3-red',
         bandmaterial: 'plastic',
         released: '2018',
-        inStock: '11',
+        instock: '6',
     },
     {
         name: 'Mi Band 6',
@@ -79,7 +79,7 @@ export const productsConfig = [
         url: 'xiaomiMiBand6-black',
         bandmaterial: 'plastic',
         released: '2018',
-        inStock: '11',
+        instock: '5',
     },
     {
         name: 'Mi Band 6',
@@ -88,7 +88,7 @@ export const productsConfig = [
         url: 'xiaomiMiBand6-blue',
         bandmaterial: 'plastic',
         released: '2018',
-        inStock: '11',
+        instock: '4',
     },
     {
         name: 'Mi Band 6',
@@ -97,7 +97,7 @@ export const productsConfig = [
         url: 'xiaomiMiBand6-pink',
         bandmaterial: 'plastic',
         released: '2018',
-        inStock: '11',
+        instock: '3',
     },
     {
         name: 'Mi Band 6',
@@ -106,7 +106,7 @@ export const productsConfig = [
         url: 'xiaomiMiBand6-red',
         bandmaterial: 'plastic',
         released: '2018',
-        inStock: '11',
+        instock: '2',
     },
 
     {
@@ -116,7 +116,7 @@ export const productsConfig = [
         url: 'Lenovos2-black',
         bandmaterial: 'rubber',
         released: '2021',
-        inStock: '11',
+        instock: '1',
     },
 
     {
@@ -126,7 +126,7 @@ export const productsConfig = [
         url: 'HuaweiBand6-red',
         bandmaterial: 'silicone',
         released: '2020',
-        inStock: '11',
+        instock: '1',
     },
 
     {
@@ -136,7 +136,7 @@ export const productsConfig = [
         url: 'HuaweiBand6-pink',
         bandmaterial: 'silicone',
         released: '2020',
-        inStock: '11',
+        instock: '1',
     },
     {
         name: 'Band 6',
@@ -145,7 +145,7 @@ export const productsConfig = [
         url: 'HuaweiBand6-green',
         bandmaterial: 'silicone',
         released: '2020',
-        inStock: '11',
+        instock: '1',
     },
     {
         name: 'Band 6',
@@ -154,7 +154,7 @@ export const productsConfig = [
         url: 'HuaweiBand6-red',
         bandmaterial: 'rubber',
         released: '2020',
-        inStock: '11',
+        instock: '1',
     },
 
     {
@@ -164,7 +164,7 @@ export const productsConfig = [
         url: 'HUAWEIBand4Pro-black',
         bandmaterial: 'silicone',
         released: '2019',
-        inStock: '11',
+        instock: '1',
     },
 
     {
@@ -174,7 +174,7 @@ export const productsConfig = [
         url: 'HUAWEIBand4Pro-pink',
         bandmaterial: 'silicone',
         released: '2019',
-        inStock: '11',
+        instock: '12',
     },
 
 ]
