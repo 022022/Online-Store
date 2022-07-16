@@ -13,8 +13,8 @@ export const filtersConfig: Array<FiltersGroupObj> = [
                     min: "2016",
                     step: "1",
                     max: "2021",
-                    valueFrom: "2018",
-                    valueTo: "2020",
+                    valueFrom: "2016",
+                    valueTo: "2021",
                 }
             },
         ]
@@ -30,9 +30,9 @@ export const filtersConfig: Array<FiltersGroupObj> = [
                 filterAttrs: {
                     min: "0",
                     step: "1",
-                    max: "10",
-                    valueFrom: "1",
-                    valueTo: "5",
+                    max: "12",
+                    valueFrom: "0",
+                    valueTo: "12",
                 }
             },
         ]

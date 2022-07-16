@@ -7,6 +7,37 @@ body {
     background: rgb(249, 249, 253);
 }
 
+.logo {
+    width: 100px;
+    height: 37px;
+    background-image: url('../images/rsschool-logo.svg');
+    background-repeat: no-repeat;
+}
+
+footer {
+    height: 10em;
+    margin-top: 3em;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+footer .copyright {
+    font-size: 14px;
+    color: #333;
+    text-align: center;
+}
+footer .copyright a {
+    color: #444;
+}
+footer .copyright a:hover {
+    color: #555;
+}
+footer .copyright:before {
+    content: '©';
+}
+
+
 .products {
     display: flex;
     flex-wrap: wrap;

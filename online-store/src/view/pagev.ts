@@ -3,6 +3,7 @@
 export class PageV {
 
     header;
+    footer;
 
     constructor() {
         this.header = `
@@ -13,8 +14,13 @@ export class PageV {
             <button class="button">Total Reset</button>
         </div>
     `
+        this.footer =  `
 
-     //
+        <div class="copyright">2022</div>
+            <a href="https://rs.school/js/"> <div class="logo"></div></a>
+            <a href="https://github.com/022022">My GitHub</a>
+
+    `
 
     }
 
@@ -25,19 +31,15 @@ export class PageV {
 
         const header = document.createElement('header');
         header.innerHTML = this.header;
+        const footer = document.createElement('footer');
+        footer.innerHTML = this.footer;
 
         const mainHTML = document.createElement('main');
 
         mainHTML.append(filtersHTML);
         mainHTML.append(productsHTML);
 
-        const pageHTML = document.createElement('div');
-
-        pageHTML.append(header);
-        pageHTML.append(mainHTML);
-
-        document.body.prepend(pageHTML);
-
+        document.body.append(header, mainHTML, footer);
     }
 
 

@@ -97,7 +97,7 @@ export class FiltersV {
         this.listenSliderToFillItQuickly();
 
         return this.filtersHTML;
-        //document.body.prepend(this.filtersHTML);
+
     }
 
     fillSliderFromTo(inputFrom: HTMLInputElement, inputTo:HTMLInputElement) {
