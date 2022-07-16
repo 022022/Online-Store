@@ -37,25 +37,9 @@ export class PageV {
         pageHTML.append(mainHTML);
 
         document.body.prepend(pageHTML);
+
     }
 
+
+
 }
-
-/*
-<header>
-    <h1>Smart Bands </h1>
-    <div class="favorites">icon</div>
-    <div class="controls">
-        <button>Total Reset</button>
-    </div>
-</header>
-
-
-<main class="main">
-
-filters
-
-products
-
-</main>
-*/

@@ -19,6 +19,7 @@ export class FiltersC {
         this.filters = this.filtersModel.filters;
         this.filtersHTML = this.filtersView.render(this.filters);
 
+        //this.filterView.listenSliderToFillItQuickly(this.handle)
         this.filtersView.listenFilters(this.handleFilters);
         this.filtersView.listenResetFilters(this.resetFilters);
 
@@ -30,22 +31,27 @@ export class FiltersC {
     //}
 
     handleFilters = (id: string, value: string): void => {
-
-
         for(const group of this.filters){
             for(const filter of group.filters){
                 if (filter.id === id){
 
-                    //console.log('c', filter.id);
+                    switch(filter.filterType){
 
-                    switch(filter.state){
-                        case 'off': filter.state = 'on';
-                            break;
-                        case 'on': filter.state = 'off';
-                            break;
-                        default:
-                            filter.state = value;
+                        case 'checkbox':
+                            switch(filter.state){
+                                case 'off': filter.state = 'on';
+                                    break;
+                                case 'on': filter.state = 'off';
+                                    break;
+                                default:
+                                    filter.state = value;
+                            }
+
+                        case 'range':
+                            filter.filterAttrs.valueFrom = value.split('-')[0];
+                            filter.filterAttrs.valueTo = value.split('-')[1];
                     }
+
                 }
             }
         }
@@ -95,6 +101,8 @@ export class ProductsC {
                         }
                         break;
                     case 'range': // todo
+
+
                         break;
                 }
             }
@@ -109,7 +117,7 @@ export class ProductsC {
 
             const filteredProductsByGroup = productsTemp.filter((product) => {
                 for(const condition of conditionsGroup){
-                    console.log('condition', condition);
+
                     if(product[Object.keys(condition)[0]] === Object.values(condition)[0]){
                         return true;
                     }
@@ -142,6 +150,8 @@ class PageC {
         this.pageView = new PageV;
 
         const filtersHTML = this.filters.filtersHTML;
+
+        console.log(this.filters.filters);
 
         const arrangedProducts = this.products.arrangeProducts(this.filters.filters, this.products.products);
         const productsHTML = this.products.getHTML(arrangedProducts);

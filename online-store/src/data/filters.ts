@@ -7,13 +7,14 @@ export const filtersConfig: Array<FiltersGroupObj> = [
         filters: [
             {
                 filterType: "range",
-                id: "releaseDate",
+                id: "releasedate",
                 state: '2021',
                 filterAttrs: {
                     min: "2016",
                     step: "1",
                     max: "2021",
-                    value: "2021",
+                    valueFrom: "2018",
+                    valueTo: "2020",
                 }
             },
         ]
@@ -30,7 +31,8 @@ export const filtersConfig: Array<FiltersGroupObj> = [
                     min: "0",
                     step: "1",
                     max: "10",
-                    value: "1",
+                    valueFrom: "1",
+                    valueTo: "5",
                 }
             },
         ]

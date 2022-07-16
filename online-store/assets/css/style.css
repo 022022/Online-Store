@@ -105,3 +105,30 @@ h1 {
     text-transform: uppercase;
     letter-spacing: 0.1rem;
 }
+
+.slider-wrapper {
+    position: relative;
+}
+
+.range {
+    position: absolute;
+
+    appearance: none;
+    pointer-events: none;
+    background: transparent;
+    border: 1px solid #3aaa6f;
+    border-radius: 8px;
+    height: 6px;
+    width: 100%;
+}
+
+.range::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    pointer-events: all;
+    width: 16px;
+    height: 16px;
+    background-color: #5aa876;
+    border-radius: 50%;
+    /* box-shadow: 0 0 0 1px #c6c6c6; */
+    cursor: pointer;
+}
