@@ -18,12 +18,12 @@ export class ProductsV {
             const productCard = document.createElement('div');
             //productCard.textContent = product.url;
 
-            productCard.innerHTML =
+            productCard.classList.add('product');
+
+            const productHeader = document.createElement('div');
+            productHeader.setAttribute('class', 'product__header');
+            productHeader.innerHTML =
             `
-            <div class="product">
-
-
-            <div class="product__header">
                 <img src="./images/${product.url}.jpg" class="product__image">
                 <div>
                     <div class="product__name"> ${product.name} </div>
@@ -34,20 +34,30 @@ export class ProductsV {
 
                     <div > <span class="product__property">Released</span> ${product.released} </div>
                 </div>
-            </div>
-            <div class="product__footer">
-                <div>
-                ${product.instock} in stock
-
-                </div>
-
-                <button class="button">Add to Cart</button>
-            </div>
-
-            </div>
             `
 
+            const productFooter = document.createElement('div');
+            productFooter.setAttribute('class', 'product__footer');
 
+            if(product.incart === 'no') {
+                productCard.classList.remove('incart');
+                productFooter.innerHTML =
+                `
+                    <div> ${product.instock} in stock </div>
+                    <button class="button" id="add-${product.id}">Add to Cart</button>
+                `
+            }
+
+            if(product.incart === 'yes') {
+                productCard.classList.add('incart');
+                productFooter.innerHTML =
+                `
+                    <div> ${product.instock} in stock </div>
+                    <button class="secondary-button" id="remove-${product.id}">Remove from cart</button>
+                `
+            }
+
+            productCard.append(productHeader, productFooter);
 
             this.productsHTML.append(productCard);
         })

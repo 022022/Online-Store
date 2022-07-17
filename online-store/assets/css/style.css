@@ -83,7 +83,6 @@ footer .copyright:before {
 
 .button {
     outline: none;
-    cursor: pointer;
     border-radius: 500px;
     transition-property: background-color, color;
     transition-duration: .3s;
@@ -96,12 +95,32 @@ footer .copyright:before {
     background-color: transparent;
 }
 
-
-
 .button:hover {
     color: #fff;
     background-color: #3a7e52;
 }
+
+
+.secondary-button {
+    outline: none;
+    border-radius: 500px;
+    transition-property: background-color, color;
+    transition-duration: .3s;
+    border: 1px solid transparent;
+    text-align: center;
+    padding: 1.1rem 2rem 1rem;
+    color: #494949;
+    box-shadow: inset 0 0 0 1px #86afad;
+    background-color: transparent;
+    font-size: 1.4rem;
+}
+
+.secondary-button:hover {
+    color: #fff;
+    background-color: #86afad;
+}
+
+
 
 main {
     display: flex;
@@ -129,6 +148,11 @@ header {
     margin-bottom: 2rem;
     border-bottom: 2px solid #c1d8c9;
     align-items: center;
+
+    position: sticky;
+    top: 0px;
+    background: rgb(249, 249, 253);
+    z-index: 100;
 }
 
 h1 {
@@ -170,4 +194,33 @@ h1 {
 
 label {
     text-transform: capitalize;
+}
+
+input, label, button {
+    cursor: pointer;
+}
+
+.incart {
+    outline: medium dashed #3c8f5a;
+    color: #3c8f5a;
+}
+
+.pop-up {
+    display: none;
+    background-color: rgb(255, 246, 201);
+    position: absolute;
+    top: 6rem;
+    right: 1rem;
+    padding: 1rem 2rem;
+    border-radius: 5px;
+    border: 2px solid #d6a02d;
+    box-shadow: 3px 3px 10px rgb(51 63 56 / 27%);
+    font-size: 1.8rem;
+    cursor: pointer;
+    width: 35rem;
+}
+
+@keyframes warning-on {
+    0% {opacity: 0;}
+    100% {opacity: 1;}
 }

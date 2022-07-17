@@ -1,10 +1,11 @@
 import '../assets/css/style.css';
 
-import { FiltersM, ProductsM } from './model';
+import { FiltersM, ProductsM, CartM } from './model';
 import { FiltersV } from './view/filtersv';
 import { ProductsV } from './view/productsv';
 import { FiltersGroupObj, ProductsObj } from './types/types';
 import { PageV } from './view/pagev';
+import { CartV } from './view/cartv';
 
 export class FiltersC {
     filtersModel;
@@ -19,7 +20,6 @@ export class FiltersC {
         this.filters = this.filtersModel.filters;
         this.filtersHTML = this.filtersView.render(this.filters);
 
-        //this.filterView.listenSliderToFillItQuickly(this.handle)
         this.filtersView.listenFilters(this.handleFilters);
         this.filtersView.listenResetFilters(this.resetFilters);
 
@@ -66,7 +66,6 @@ export class FiltersC {
 
     resetFilters = () => {
         this.filtersModel.removeFromLocalStorage();
-        location.reload();
     }
 }
 
@@ -82,7 +81,7 @@ export class ProductsC {
         //this.filtersView.listenProducts(this.putToCart);
     }
 
-    arrangeProducts(filters: Array<FiltersGroupObj>, products: Array<ProductsObj>){
+    arrangeProducts(filters: Array<FiltersGroupObj>, products: Array<ProductsObj>, inCart: Array<string>){
 
     // 1)get simpler version of filters data structure - array of objects with only checked checkboxes
         let filtersGroupsOfConditions = [];
@@ -113,8 +112,8 @@ export class ProductsC {
             filtersGroupsOfConditions.push(conditionsGroup);
         }
 
-     console.log('filtersGroupsOfConditions', filtersGroupsOfConditions);
-     console.log('rangeFilters', rangeFilters);
+     //console.log('filtersGroupsOfConditions', filtersGroupsOfConditions);
+     //console.log('rangeFilters', rangeFilters);
 
     // 2) filter by checkboxes
     // [Object.keys(condition)[0]] === checkbox id
@@ -145,11 +144,7 @@ export class ProductsC {
                 const id = rangeFilter[0];
                 const from = Number(rangeFilter[1]);
                 const to = Number(rangeFilter[2]);
-                console.log('id, from, to', id, from, to);
-                console.log(product[id]);
-
                 const value = Number(product[id]);
-                console.log('value', value);
 
                 if (value >= from && value <= to){
                     return true;
@@ -157,6 +152,14 @@ export class ProductsC {
             });
             productsFilteredByRanges = productsTemp;
         }
+
+        // all filters applied, filtered products are now in 'productsFilteredByRanges'
+
+        productsFilteredByRanges.forEach(product => {
+            if (inCart.includes(product.id)){
+                product.incart = 'yes';
+            }
+        })
 
         return productsFilteredByRanges;
 
@@ -169,26 +172,72 @@ export class ProductsC {
 
 }
 
+class CartC {
+    cartHTML: Element;
+    cartView;
+    cartModel;
+    cartQuantity;
+    inCart;
+
+    constructor(){
+        this.cartModel = new CartM;
+        this.cartQuantity = this.cartModel.quantity;
+        this.inCart = this.cartModel.inCart;
+        this.cartView = new CartV(this.cartQuantity);
+        this.cartHTML = this.cartView.cartHTML;
+    }
+
+
+    handleCart = (itemId: string): void => {
+
+        const action = itemId.split('-')[0];
+        const id = itemId.split('-')[1];
+
+        if(action === 'add'){
+            if (this.cartQuantity < 20){
+                this.cartModel.addToCart(id);
+                new PageC;
+            } else {
+                this.cartView.showModal();
+            }
+        }
+
+        if(action === 'remove'){
+            this.cartModel.removeFromCart(id);
+            new PageC;
+        }
+    }
+
+    addCartListeners(){
+        this.cartView.listenAddToCart(this.handleCart);
+    }
+}
+
 
 class PageC {
     filters;
     products;
     pageView;
+    cart;
 
     constructor(){
         this.filters = new FiltersC;
         this.products = new ProductsC;
+        this.cart = new CartC;
 
         this.pageView = new PageV;
 
         const filtersHTML = this.filters.filtersHTML;
+        const cartHTML = this.cart.cartHTML;
 
-        const arrangedProducts = this.products.arrangeProducts(this.filters.filters, this.products.products);
+        const arrangedProducts = this.products.arrangeProducts(this.filters.filters, this.products.products, this.cart.inCart);
         const productsHTML = this.products.getHTML(arrangedProducts);
 
-        console.log(this.filters.filters, this.products.products);
+        //console.log(this.filters.filters, this.products.products);
 
-        this.pageView.renderWholePage(filtersHTML, productsHTML);
+        this.pageView.renderWholePage(filtersHTML, productsHTML, cartHTML);
+
+        this.cart.addCartListeners();
     }
 }
 

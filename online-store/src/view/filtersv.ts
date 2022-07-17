@@ -96,7 +96,7 @@ export class FiltersV {
 
         this.resetButton.setAttribute('id', 'reset-filters');
         this.resetButton.setAttribute('class', 'button');
-        this.resetButton.innerText = 'Reset';
+        this.resetButton.innerText = 'Reset Filters';
         this.filtersHTML.append(this.resetButton);
 
         this.listenSliderToDrawMove();

@@ -22,6 +22,9 @@ export interface CallbackLocalStorage {
     (): void;
 }
 
+export interface CallbackAddToCart {
+    (id: string): void;
+}
 
 export interface ProductsObj{
     [key: string]: string;

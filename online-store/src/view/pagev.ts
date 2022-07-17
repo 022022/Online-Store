@@ -2,18 +2,13 @@
 
 export class PageV {
 
-    header;
     footer;
+    appName;
 
     constructor() {
-        this.header = `
 
-        <h1>Smart Bands Store</h1>
-        <div class="favorites">0 items in Favorites</div>
-        <div class="controls">
-            <button class="button">Total Reset</button>
-        </div>
-    `
+        this.appName = 'Smart Bands Store';
+
         this.footer =  `
 
         <div class="copyright">2022</div>
@@ -25,21 +20,42 @@ export class PageV {
     }
 
 
-    renderWholePage(filtersHTML: Element, productsHTML: Element) {
+    renderWholePage(filtersHTML: Element, productsHTML: Element, cartHTML: Element) {
 
         (document.querySelector('body') as Element).innerHTML = '';
 
         const header = document.createElement('header');
-        header.innerHTML = this.header;
+        header.innerHTML = `<h1> ${this.appName} </h1>`;
+        header.append(cartHTML);
+
+       // const popUp = document.createElement('div');
+        //popUp.setAttribute('class', 'pop-up')
+       // popUp.innerHTML = `Sorry, you have added maximum (20 products)`;
+
+       // header.append(popUp);
+
+        //header.append()
+
+         //   <div class="controls">
+         //       <button class="button">Total Reset</button>
+         //   </div>
+
+
         const footer = document.createElement('footer');
         footer.innerHTML = this.footer;
 
+
+
         const mainHTML = document.createElement('main');
 
-        mainHTML.append(filtersHTML);
-        mainHTML.append(productsHTML);
+        mainHTML.append(filtersHTML, productsHTML);
+        //mainHTML.append(filtersHTML);
+        //mainHTML.append(productsHTML);
+
+
 
         document.body.append(header, mainHTML, footer);
+
     }
 
 
