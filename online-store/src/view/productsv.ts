@@ -53,6 +53,7 @@ export class ProductsV {
                 productFooter.innerHTML =
                 `
                     <div> ${product.instock} in stock </div>
+                    <div class="accented-text"> In cart </div>
                     <button class="secondary-button" id="remove-${product.id}">Remove from cart</button>
                 `
             }

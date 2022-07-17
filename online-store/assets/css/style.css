@@ -77,7 +77,6 @@ footer .copyright:before {
 
 .product__footer {
     padding-top: 1rem;
-    color:#3c8f5a;
     align-items: center;
 }
 
@@ -202,7 +201,7 @@ input, label, button {
 
 .incart {
     outline: medium dashed #3c8f5a;
-    color: #3c8f5a;
+
 }
 
 .pop-up {
@@ -223,4 +222,9 @@ input, label, button {
 @keyframes warning-on {
     0% {opacity: 0;}
     100% {opacity: 1;}
+}
+
+.cart {
+    font-size: 1.8rem;
+    color:#3c8f5a;
 }
