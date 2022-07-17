@@ -26,6 +26,10 @@ export interface CallbackAddToCart {
     (id: string): void;
 }
 
+export interface CallbackSearch {
+    (id: string): void;
+}
+
 export interface ProductsObj{
     [key: string]: string;
 }

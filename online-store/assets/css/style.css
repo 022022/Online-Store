@@ -45,6 +45,8 @@ footer .copyright:before {
     font-size: 1.8rem;
     line-height: 130%;
     align-content: flex-start;
+
+    grid-area: products;
 }
 
 .product {
@@ -122,8 +124,13 @@ footer .copyright:before {
 
 
 main {
-    display: flex;
-    gap: 5rem;
+    display: grid;
+    grid-template-areas: "filters actions"
+                        "filters  products";
+    grid-template-rows: 5rem 1fr;
+    grid-template-columns: 20rem 1fr;
+    column-gap: 7rem;
+    row-gap: 2rem;
 }
 
 .filters {
@@ -133,6 +140,8 @@ main {
     gap: 3rem;
     font-size: 1.6rem;
     min-width: 20rem;
+
+    grid-area: filters;
 }
 
 .group__name {
@@ -227,4 +236,25 @@ input, label, button {
 .cart {
     font-size: 1.8rem;
     color:#3c8f5a;
+}
+
+.actions {
+    grid-area: actions;
+    display: flex;
+}
+
+.search-message {
+    min-height: 5rem;
+    font-size: 1.8rem;
+    padding: 1rem 0;
+}
+
+.search {
+    width: 30rem;
+    border: 1px solid #3a7e52;
+    padding: 1rem;
+    height: 4rem;
+    border-radius: 0.5rem;
+    outline: none;
+    color: #3a7e52;
 }

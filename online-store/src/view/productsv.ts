@@ -11,7 +11,7 @@ export class ProductsV {
         this.productsHTML.classList.add('products');
 
         if(arrangedProducts.length === 0) {
-            this.productsHTML.innerHTML = 'Sorry, but nothing matched your search or filter criteria. Please try again'
+            this.productsHTML.innerHTML = 'Sorry, but nothing matched your filter criteria. Please try again'
         }
 
         arrangedProducts.forEach( (product) => {

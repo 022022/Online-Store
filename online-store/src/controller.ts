@@ -6,6 +6,7 @@ import { ProductsV } from './view/productsv';
 import { FiltersGroupObj, ProductsObj } from './types/types';
 import { PageV } from './view/pagev';
 import { CartV } from './view/cartv';
+import { SearchV } from './view/searchv';
 
 export class FiltersC {
     filtersModel;
@@ -155,6 +156,8 @@ export class ProductsC {
 
         // all filters applied, filtered products are now in 'productsFilteredByRanges'
 
+        // see what's in Cart
+
         productsFilteredByRanges.forEach(product => {
             if (inCart.includes(product.id)){
                 product.incart = 'yes';
@@ -162,7 +165,6 @@ export class ProductsC {
         })
 
         return productsFilteredByRanges;
-
     }
 
     getHTML(arrangedProducts: Array<ProductsObj>)   {
@@ -214,11 +216,59 @@ class CartC {
 }
 
 
+class SearchC {
+    searchHTML;
+    searchView;
+    constructor(){
+        this.searchView = new SearchV;
+        this.searchHTML = this.searchView.searchHTML;
+        this.searchView.listenSearch(this.handleSearch);
+    }
+
+    handleSearch = (str: string): void => {
+
+        console.log(str);
+
+        if (!str) location.reload(); //empty string - just show all by filters and sorting
+        const allProductNames = document.querySelectorAll('.product__name');
+
+        let somethingIsFound = false;
+
+        const message = document.querySelector('#search-message');
+        if(!message) throw new Error();
+
+        // hide all products that don't match search criteria
+
+        for(const item of allProductNames){
+            const parent = item.closest('.product');
+            if(!parent) throw new Error();
+
+            if(!item.innerHTML.toLowerCase().includes(str.toLowerCase())){
+                (parent as HTMLElement).style.display = 'none';
+            } else {
+                (parent as HTMLElement).style.display = 'block';
+                somethingIsFound = true;
+            }
+        }
+
+        // if nothing is found - show text
+
+        if(!somethingIsFound){
+            message.innerHTML = 'Sorry, search found nothing';
+        } else {
+            message.innerHTML = '';
+        }
+    }
+
+}
+
+
 class PageC {
     filters;
     products;
     pageView;
     cart;
+    search;
 
     constructor(){
         this.filters = new FiltersC;
@@ -227,15 +277,20 @@ class PageC {
 
         this.pageView = new PageV;
 
+        this.search = new SearchC;
+        const searchHTML = this.search.searchHTML;
+
         const filtersHTML = this.filters.filtersHTML;
         const cartHTML = this.cart.cartHTML;
 
-        const arrangedProducts = this.products.arrangeProducts(this.filters.filters, this.products.products, this.cart.inCart);
+        const arrangedProducts = this.products.arrangeProducts(this.filters.filters,
+                                            this.products.products, this.cart.inCart);
+
         const productsHTML = this.products.getHTML(arrangedProducts);
 
         //console.log(this.filters.filters, this.products.products);
 
-        this.pageView.renderWholePage(filtersHTML, productsHTML, cartHTML);
+        this.pageView.renderWholePage(filtersHTML, productsHTML, cartHTML, searchHTML);
 
         this.cart.addCartListeners();
     }

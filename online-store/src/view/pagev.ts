@@ -20,7 +20,7 @@ export class PageV {
     }
 
 
-    renderWholePage(filtersHTML: Element, productsHTML: Element, cartHTML: Element) {
+    renderWholePage(filtersHTML: Element, productsHTML: Element, cartHTML: Element, searchHTML: Element) {
 
         (document.querySelector('body') as Element).innerHTML = '';
 
@@ -28,33 +28,20 @@ export class PageV {
         header.innerHTML = `<h1> ${this.appName} </h1>`;
         header.append(cartHTML);
 
-       // const popUp = document.createElement('div');
-        //popUp.setAttribute('class', 'pop-up')
-       // popUp.innerHTML = `Sorry, you have added maximum (20 products)`;
-
-       // header.append(popUp);
-
-        //header.append()
-
-         //   <div class="controls">
-         //       <button class="button">Total Reset</button>
-         //   </div>
-
-
         const footer = document.createElement('footer');
         footer.innerHTML = this.footer;
 
+        const actions = document.createElement('div');
+        actions.setAttribute('class', 'actions');
+        actions.append(searchHTML);
 
-
-        const mainHTML = document.createElement('main');
-
-        mainHTML.append(filtersHTML, productsHTML);
+        const main = document.createElement('main');
+        main.append(filtersHTML, actions, productsHTML);
         //mainHTML.append(filtersHTML);
         //mainHTML.append(productsHTML);
 
 
-
-        document.body.append(header, mainHTML, footer);
+        document.body.append(header, main, footer);
 
     }
 
