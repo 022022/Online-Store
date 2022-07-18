@@ -94,6 +94,7 @@ footer .copyright:before {
     color: #3a7e52;
     box-shadow: inset 0 0 0 1px #3a7e52;
     background-color: transparent;
+    max-height: 4.2rem;
 }
 
 .button:hover {
@@ -114,6 +115,7 @@ footer .copyright:before {
     box-shadow: inset 0 0 0 1px #86afad;
     background-color: transparent;
     font-size: 1.4rem;
+    max-height: 4.2rem;
 }
 
 .secondary-button:hover {
@@ -127,7 +129,6 @@ main {
     display: grid;
     grid-template-areas: "filters actions"
                         "filters  products";
-    grid-template-rows: 5rem 1fr;
     grid-template-columns: 20rem 1fr;
     column-gap: 7rem;
     row-gap: 2rem;
@@ -241,11 +242,12 @@ input, label, button {
 .actions {
     grid-area: actions;
     display: flex;
+    flex-wrap: wrap;
     gap: 2rem;
 }
 
 .search-message {
-    min-height: 5rem;
+    min-height: 2rem;
     font-size: 1.8rem;
     padding: 1rem 0;
 }

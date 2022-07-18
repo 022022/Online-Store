@@ -1,13 +1,19 @@
-
+import { CallbackLocalStorage } from '../types/types';
 
 export class PageV {
 
     footer;
     appName;
+    totalResetButton;
 
     constructor() {
 
         this.appName = 'Smart Bands Store';
+
+        this.totalResetButton = document.createElement('button');
+        this.totalResetButton.setAttribute('class', 'button');
+        this.totalResetButton.setAttribute('id', 'total-reset');
+        this.totalResetButton.innerText = 'Total Reset';
 
         this.footer =  `
 
@@ -35,6 +41,7 @@ export class PageV {
         actions.setAttribute('class', 'actions');
         actions.append(searchHTML);
         actions.append(sortHTML);
+        actions.append(this.totalResetButton);
 
         const main = document.createElement('main');
         main.append(filtersHTML, actions, productsHTML);
@@ -46,6 +53,8 @@ export class PageV {
 
     }
 
-
+    listenTotalReset(handler: CallbackLocalStorage){
+        this.totalResetButton.addEventListener('click', (event) => handler());
+    }
 
 }

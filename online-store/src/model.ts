@@ -75,3 +75,13 @@ export class SortM {
         localStorage.setItem('app-sort', JSON.stringify(sorting));
     }
 }
+
+export class PageM {
+    constructor(){
+    }
+
+    totalReset(){
+        localStorage.clear();
+        location.reload();
+    }
+}

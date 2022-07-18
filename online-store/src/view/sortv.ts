@@ -42,9 +42,6 @@ export class SortV {
         this.sortHTML.addEventListener('change', (event) => {
             if (!event.target) throw new Error;
             const sorting = (event.target as HTMLInputElement).value;
-
-            console.log((event.target as HTMLInputElement).value);
-
             handler(sorting);
         });
     }

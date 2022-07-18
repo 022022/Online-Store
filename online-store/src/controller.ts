@@ -1,6 +1,6 @@
 import '../assets/css/style.css';
 
-import { FiltersM, ProductsM, CartM, SortM } from './model';
+import { FiltersM, ProductsM, CartM, SortM, PageM } from './model';
 import { FiltersV } from './view/filtersv';
 import { ProductsV } from './view/productsv';
 import { FiltersGroupObj, ProductsObj } from './types/types';
@@ -165,7 +165,6 @@ export class ProductsC {
 
 
         // apply sorting
-        console.log('arrange - ', sortOrder);
         switch(sortOrder){
             case 'name-a':
                 productsFilteredByRanges.sort((a, b): number => {
@@ -321,6 +320,7 @@ class PageC {
     cart;
     search;
     sort;
+    pageModel;
 
     constructor(){
         this.filters = new FiltersC;
@@ -329,6 +329,7 @@ class PageC {
         this.sort = new SortC;
 
         this.pageView = new PageV;
+        this.pageModel = new PageM;
 
         this.search = new SearchC;
 
@@ -337,7 +338,6 @@ class PageC {
         const cartHTML = this.cart.cartHTML;
         const sortHTML = this.sort.sortHTML;
 
-        console.log('page - ', this.sort.sortOrder);
         const arrangedProducts = this.products.arrangeProducts(this.filters.filters,
                                             this.products.products, this.cart.inCart, this.sort.sortOrder);
 
@@ -348,6 +348,11 @@ class PageC {
         this.pageView.renderWholePage(filtersHTML, productsHTML, cartHTML, searchHTML, sortHTML);
 
         this.cart.addCartListeners();
+        this.pageView.listenTotalReset(this.totalPageReset);
+    }
+
+    totalPageReset = ():void => {
+        this.pageModel.totalReset();
     }
 }
 
