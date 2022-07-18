@@ -11,6 +11,7 @@ export class FiltersV {
     }
 
     render(filters: Array<FiltersGroupObj>){
+
         this.filtersHTML.classList.add('filters');
         this.filtersControls.classList.add('filters__controls');
 

@@ -4,7 +4,8 @@ export class FiltersM {
     filters;
     constructor(){
         const savedFilters = localStorage.getItem('app-filters') as string;
-        this.filters = JSON.parse(savedFilters) || filtersConfig;
+        const copyOfFiltersConfig = JSON.stringify(filtersConfig);
+        this.filters = JSON.parse(savedFilters) || JSON.parse(copyOfFiltersConfig);
     }
 
     saveToLocalStorage(){

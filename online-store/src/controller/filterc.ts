@@ -19,9 +19,7 @@ export class FiltersC {
 
         this.filtersView.listenFilters(this.handleFilters);
         this.filtersView.listenResetFilters(this.resetFilters);
-
     }
-
 
     handleFilters = (id: string, value: string): void => {
         for(const group of this.filters){
