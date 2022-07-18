@@ -9,6 +9,7 @@ import { CartV } from './view/cartv';
 import { SearchV } from './view/searchv';
 import { SortV } from './view/sortv';
 
+
 export class FiltersC {
     filtersModel;
     filtersView;
@@ -18,7 +19,7 @@ export class FiltersC {
     constructor(){
         this.filtersModel = new FiltersM;
         this.filtersView = new FiltersV;
-        //this.filters = this.arrangeFilters(this.filtersModel.filters);
+
         this.filters = this.filtersModel.filters;
         this.filtersHTML = this.filtersView.render(this.filters);
 
@@ -27,10 +28,6 @@ export class FiltersC {
 
     }
 
-    //arrangeFilters(filters: Array<FiltersGroupObj>){
-        // some logic
-    //    return filters;
-    //}
 
     handleFilters = (id: string, value: string): void => {
         for(const group of this.filters){
@@ -63,11 +60,12 @@ export class FiltersC {
         this.filtersModel.filters = this.filters;
         this.filtersModel.saveToLocalStorage();
 
-        new PageC;
+        app.renderAppPage();
     }
 
     resetFilters = () => {
         this.filtersModel.removeFromLocalStorage();
+        app.renderAppPage();
     }
 }
 
@@ -83,7 +81,8 @@ export class ProductsC {
         //this.filtersView.listenProducts(this.putToCart);
     }
 
-    arrangeProducts(filters: Array<FiltersGroupObj>, products: Array<ProductsObj>, inCart: Array<string>, sortOrder: string){
+    arrangeProducts(filters: Array<FiltersGroupObj>, products: Array<ProductsObj>,
+        inCart: Array<string>, sortOrder: string, searchWord: string){
 
     // 1)get simpler version of filters data structure - array of objects with only checked checkboxes
         let filtersGroupsOfConditions = [];
@@ -165,6 +164,12 @@ export class ProductsC {
             }
         })
 
+        // apply search
+
+        if(searchWord){
+            const productsFilteredBySearch = productsFilteredByRanges.filter(product => product.name.toLowerCase().includes(searchWord))
+            productsFilteredByRanges = productsFilteredBySearch;
+        }
 
         // apply sorting
         switch(sortOrder){
@@ -233,7 +238,7 @@ class CartC {
         if(action === 'add'){
             if (this.cartQuantity < 20){
                 this.cartModel.addToCart(id);
-                new PageC;
+                app.renderAppPage();
             } else {
                 this.cartView.showModal();
             }
@@ -241,7 +246,7 @@ class CartC {
 
         if(action === 'remove'){
             this.cartModel.removeFromCart(id);
-            new PageC;
+            app.renderAppPage();
         }
     }
 
@@ -254,43 +259,19 @@ class CartC {
 class SearchC {
     searchHTML;
     searchView;
-    constructor(){
-        this.searchView = new SearchV;
+    constructor(searchWord: string){
+        this.searchView = new SearchV(searchWord);
         this.searchHTML = this.searchView.searchHTML;
         this.searchView.listenSearch(this.handleSearch);
     }
 
     handleSearch = (str: string): void => {
+        app.pageModel.searchWord = str.toLowerCase();
+        app.renderAppPage();
+    }
 
-        if (!str) location.reload(); //empty string - just show all by filters and sorting
-        const allProductNames = document.querySelectorAll('.product__name');
-
-        let somethingIsFound = false;
-
-        const message = document.querySelector('#search-message');
-        if(!message) throw new Error();
-
-        // hide all products that don't match search criteria
-
-        for(const item of allProductNames){
-            const parent = item.closest('.product');
-            if(!parent) throw new Error();
-
-            if(!item.innerHTML.toLowerCase().includes(str.toLowerCase())){
-                (parent as HTMLElement).style.display = 'none';
-            } else {
-                (parent as HTMLElement).style.display = 'block';
-                somethingIsFound = true;
-            }
-        }
-
-        // if nothing is found - show text
-
-        if(!somethingIsFound){
-            message.innerHTML = 'Sorry, search found nothing';
-        } else {
-            message.innerHTML = '';
-        }
+    setFocus(){
+        this.searchView.setFocus();
     }
 }
 
@@ -310,48 +291,48 @@ class SortC {
 
     handleSort = (sorting: string): void => {
         this.sortModel.update(sorting);
-        new PageC;
+        app.renderAppPage();
     }
 }
 
 
 class PageC {
-    filters;
-    products;
-    pageView;
-    cart;
-    search;
-    sort;
     pageModel;
 
     constructor(){
-        this.filters = new FiltersC;
-        this.products = new ProductsC;
-        this.cart = new CartC;
-        this.sort = new SortC;
+        this.pageModel = new PageM;
+        this.renderAppPage();
+    }
 
-        this.search = new SearchC;
+    renderAppPage(){
+        const filters = new FiltersC;
+        const products = new ProductsC;
+        const cart = new CartC;
+        const sort = new SortC;
 
-        const searchHTML = this.search.searchHTML;
-        const filtersHTML = this.filters.filtersHTML;
-        const cartHTML = this.cart.cartHTML;
-        const sortHTML = this.sort.sortHTML;
+        const search = new SearchC(this.pageModel.searchWord);
+        const searchHTML = search.searchHTML;
+
+        const filtersHTML = filters.filtersHTML;
+        const cartHTML = cart.cartHTML;
+        const sortHTML = sort.sortHTML;
 
 
-        const arrangedProducts = this.products.arrangeProducts(this.filters.filters,
-                                            this.products.products, this.cart.inCart, this.sort.sortOrder);
+        const arrangedProducts = products.arrangeProducts(filters.filters,
+                                            products.products, cart.inCart, sort.sortOrder, this.pageModel.searchWord);
 
-        const productsHTML = this.products.getHTML(arrangedProducts);
+        const productsHTML = products.getHTML(arrangedProducts);
 
         //console.log(this.filters.filters, this.products.products);
 
-        this.pageView = new PageV;
-        this.pageView.renderWholePage(filtersHTML, productsHTML, cartHTML, searchHTML, sortHTML);
+        const pageView = new PageV;
+        pageView.renderWholePage(filtersHTML, productsHTML, cartHTML, searchHTML, sortHTML);
 
-        this.cart.addCartListeners();
+        cart.addCartListeners();
 
-        this.pageModel = new PageM;
-        this.pageView.listenTotalReset(this.totalPageReset);
+        search.setFocus();
+
+        pageView.listenTotalReset(this.totalPageReset);
     }
 
     totalPageReset = ():void => {
@@ -360,4 +341,4 @@ class PageC {
 }
 
 
-new PageC;
+const app = new PageC;

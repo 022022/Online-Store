@@ -2,16 +2,23 @@ import { CallbackSearch } from '../types/types';
 
 export class SearchV {
     searchHTML;
-    constructor(){
+    searchField;
+    constructor(searchWord: string){
         this.searchHTML = document.createElement('div');
-        this.searchHTML.innerHTML = `<input class="search"
-            autofocus
-            type="search"
-            autocomplete='off'
-            placeholder="Search for ...">
-            <div id="search-message" class="search-message">
-            </div>
-            `
+        this.searchField = document.createElement('input');
+
+        if(searchWord){
+            this.searchField.value = searchWord;
+        }
+
+        this.searchField.setAttribute('autofocus', 'autofocus');
+        this.searchField.setAttribute('type', 'search');
+        this.searchField.setAttribute('autocomplete', 'off');
+        this.searchField.setAttribute('placeholder', 'Search for ...');
+        this.searchField.setAttribute('class', 'search');
+
+        this.searchHTML.append(this.searchField);
+
     }
 
     listenSearch(handler: CallbackSearch) {
@@ -20,5 +27,9 @@ export class SearchV {
             const searchWord = (event.target as HTMLInputElement).value;
             handler(searchWord);
         });
+    }
+
+    setFocus(){
+        this.searchField.focus();
     }
 }

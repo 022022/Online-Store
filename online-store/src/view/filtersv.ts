@@ -11,8 +11,6 @@ export class FiltersV {
 
     render(filters: Array<FiltersGroupObj>){
         this.filtersHTML.classList.add('filters');
-        //this.filtersHTML.setAttribute('id', 'filters');
-
 
         filters.forEach((item) => {
             const groupContainer = document.createElement('div');

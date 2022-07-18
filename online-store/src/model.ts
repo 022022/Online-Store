@@ -4,8 +4,10 @@ import { productsConfig } from './data/products';
 export class FiltersM {
     filters;
     constructor(){
+
         const savedFilters = localStorage.getItem('app-filters') as string;
         this.filters = JSON.parse(savedFilters) || filtersConfig;
+
     }
 
     saveToLocalStorage(){
@@ -15,8 +17,8 @@ export class FiltersM {
     }
 
     removeFromLocalStorage(){
-        localStorage.removeItem('app-filters');
-        location.reload();
+        const data = JSON.stringify(filtersConfig);
+        localStorage.setItem('app-filters', data);
     }
 }
 
@@ -76,7 +78,9 @@ export class SortM {
 }
 
 export class PageM {
+    searchWord;
     constructor(){
+        this.searchWord = '';
     }
 
     totalReset(){

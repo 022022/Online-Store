@@ -1,14 +1,5 @@
 import { CallbackSort } from '../types/types';
 
-       //
-    //    <select>
-    //        <option value="0">Sort By</option>
-    //        <option value="name-a">Name (A-Z)</option>
-    //        <option value="name-z">Name (Z-A)</option>
-     //       <option value="released-new">Year Released (newest)</option>
-     //       <option value="released-old">Year Released (oldest)</option>
-    //    <select>
-
 export class SortV {
     sortHTML;
     options = [
