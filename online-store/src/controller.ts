@@ -1,12 +1,13 @@
 import '../assets/css/style.css';
 
-import { FiltersM, ProductsM, CartM } from './model';
+import { FiltersM, ProductsM, CartM, SortM } from './model';
 import { FiltersV } from './view/filtersv';
 import { ProductsV } from './view/productsv';
 import { FiltersGroupObj, ProductsObj } from './types/types';
 import { PageV } from './view/pagev';
 import { CartV } from './view/cartv';
 import { SearchV } from './view/searchv';
+import { SortV } from './view/sortv';
 
 export class FiltersC {
     filtersModel;
@@ -82,7 +83,7 @@ export class ProductsC {
         //this.filtersView.listenProducts(this.putToCart);
     }
 
-    arrangeProducts(filters: Array<FiltersGroupObj>, products: Array<ProductsObj>, inCart: Array<string>){
+    arrangeProducts(filters: Array<FiltersGroupObj>, products: Array<ProductsObj>, inCart: Array<string>, sortOrder: string){
 
     // 1)get simpler version of filters data structure - array of objects with only checked checkboxes
         let filtersGroupsOfConditions = [];
@@ -156,13 +157,46 @@ export class ProductsC {
 
         // all filters applied, filtered products are now in 'productsFilteredByRanges'
 
-        // see what's in Cart
-
         productsFilteredByRanges.forEach(product => {
             if (inCart.includes(product.id)){
                 product.incart = 'yes';
             }
         })
+
+
+        // apply sorting
+        console.log('arrange - ', sortOrder);
+        switch(sortOrder){
+            case 'name-a':
+                productsFilteredByRanges.sort((a, b): number => {
+                    if (a.name < b.name) return -1;
+                    if (a.name > b.name) return 1;
+                    return 0;
+                })
+            break;
+
+            case 'name-z':
+                productsFilteredByRanges.sort((a, b): number => {
+                    if (b.name < a.name) return -1;
+                    if (b.name > a.name) return 1;
+                    return 0;
+                })
+            break;
+
+            case 'released-new':
+                productsFilteredByRanges.sort((a, b): number => {
+                    return Number(b.released) - Number(a.released);
+                })
+            break;
+
+            case 'released-old':
+                productsFilteredByRanges.sort((a, b): number => {
+                    return Number(a.released) - Number(b.released);
+                })
+            break;
+        }
+
+
 
         return productsFilteredByRanges;
     }
@@ -227,8 +261,6 @@ class SearchC {
 
     handleSearch = (str: string): void => {
 
-        console.log(str);
-
         if (!str) location.reload(); //empty string - just show all by filters and sorting
         const allProductNames = document.querySelectorAll('.product__name');
 
@@ -259,7 +291,26 @@ class SearchC {
             message.innerHTML = '';
         }
     }
+}
 
+class SortC {
+    sortView;
+    sortModel;
+    sortHTML;
+    sortOrder;
+    constructor() {
+        this.sortModel = new SortM;
+        this.sortOrder = this.sortModel.sortOrder;
+
+        this.sortView = new SortV(this.sortOrder);
+        this.sortHTML = this.sortView.sortHTML;
+        this.sortView.listenSort(this.handleSort);
+    }
+
+    handleSort = (sorting: string): void => {
+        this.sortModel.update(sorting);
+        new PageC;
+    }
 }
 
 
@@ -269,28 +320,32 @@ class PageC {
     pageView;
     cart;
     search;
+    sort;
 
     constructor(){
         this.filters = new FiltersC;
         this.products = new ProductsC;
         this.cart = new CartC;
+        this.sort = new SortC;
 
         this.pageView = new PageV;
 
         this.search = new SearchC;
-        const searchHTML = this.search.searchHTML;
 
+        const searchHTML = this.search.searchHTML;
         const filtersHTML = this.filters.filtersHTML;
         const cartHTML = this.cart.cartHTML;
+        const sortHTML = this.sort.sortHTML;
 
+        console.log('page - ', this.sort.sortOrder);
         const arrangedProducts = this.products.arrangeProducts(this.filters.filters,
-                                            this.products.products, this.cart.inCart);
+                                            this.products.products, this.cart.inCart, this.sort.sortOrder);
 
         const productsHTML = this.products.getHTML(arrangedProducts);
 
         //console.log(this.filters.filters, this.products.products);
 
-        this.pageView.renderWholePage(filtersHTML, productsHTML, cartHTML, searchHTML);
+        this.pageView.renderWholePage(filtersHTML, productsHTML, cartHTML, searchHTML, sortHTML);
 
         this.cart.addCartListeners();
     }

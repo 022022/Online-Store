@@ -30,6 +30,10 @@ export interface CallbackSearch {
     (id: string): void;
 }
 
+export interface CallbackSort {
+    (id: string): void;
+}
+
 export interface ProductsObj{
     [key: string]: string;
 }

@@ -20,7 +20,7 @@ export class PageV {
     }
 
 
-    renderWholePage(filtersHTML: Element, productsHTML: Element, cartHTML: Element, searchHTML: Element) {
+    renderWholePage(filtersHTML: Element, productsHTML: Element, cartHTML: Element, searchHTML: Element, sortHTML: Element) {
 
         (document.querySelector('body') as Element).innerHTML = '';
 
@@ -34,6 +34,7 @@ export class PageV {
         const actions = document.createElement('div');
         actions.setAttribute('class', 'actions');
         actions.append(searchHTML);
+        actions.append(sortHTML);
 
         const main = document.createElement('main');
         main.append(filtersHTML, actions, productsHTML);

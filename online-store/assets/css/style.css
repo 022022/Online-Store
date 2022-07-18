@@ -241,6 +241,7 @@ input, label, button {
 .actions {
     grid-area: actions;
     display: flex;
+    gap: 2rem;
 }
 
 .search-message {
@@ -249,7 +250,7 @@ input, label, button {
     padding: 1rem 0;
 }
 
-.search {
+.search, .sort {
     width: 30rem;
     border: 1px solid #3a7e52;
     padding: 1rem;
