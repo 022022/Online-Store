@@ -50,10 +50,9 @@ export class CartM {
     }
 
     removeFromCart(id: string) {
-        let cart = JSON.parse(localStorage.getItem('app-cart') as string);
+        const cart = JSON.parse(localStorage.getItem('app-cart') as string);
         const newCart = cart.filter((item: string) => item !== id);
         localStorage.setItem('app-cart', JSON.stringify(newCart));
-        location.reload();
     }
 
 }

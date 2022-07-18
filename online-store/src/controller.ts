@@ -160,6 +160,8 @@ export class ProductsC {
         productsFilteredByRanges.forEach(product => {
             if (inCart.includes(product.id)){
                 product.incart = 'yes';
+            } else {
+                product.incart = 'no';
             }
         })
 
@@ -328,15 +330,13 @@ class PageC {
         this.cart = new CartC;
         this.sort = new SortC;
 
-        this.pageView = new PageV;
-        this.pageModel = new PageM;
-
         this.search = new SearchC;
 
         const searchHTML = this.search.searchHTML;
         const filtersHTML = this.filters.filtersHTML;
         const cartHTML = this.cart.cartHTML;
         const sortHTML = this.sort.sortHTML;
+
 
         const arrangedProducts = this.products.arrangeProducts(this.filters.filters,
                                             this.products.products, this.cart.inCart, this.sort.sortOrder);
@@ -345,9 +345,12 @@ class PageC {
 
         //console.log(this.filters.filters, this.products.products);
 
+        this.pageView = new PageV;
         this.pageView.renderWholePage(filtersHTML, productsHTML, cartHTML, searchHTML, sortHTML);
 
         this.cart.addCartListeners();
+
+        this.pageModel = new PageM;
         this.pageView.listenTotalReset(this.totalPageReset);
     }
 
