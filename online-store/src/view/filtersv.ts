@@ -1,16 +1,18 @@
 import { FiltersGroupObj, CallbackHandleFilters, CallbackLocalStorage } from '../types/types';
-import { FiltersC } from '../controller';
 
 export class FiltersV {
     filtersHTML;
     resetButton;
+    filtersControls;
     constructor(){
         this.filtersHTML = document.createElement('div');
+        this.filtersControls = document.createElement('div');
         this.resetButton = document.createElement('button');
     }
 
     render(filters: Array<FiltersGroupObj>){
         this.filtersHTML.classList.add('filters');
+        this.filtersControls.classList.add('filters__controls');
 
         filters.forEach((item) => {
             const groupContainer = document.createElement('div');
@@ -88,9 +90,11 @@ export class FiltersV {
 
             })
 
-            this.filtersHTML.append(groupContainer);
+            this.filtersControls.append(groupContainer);
           });
 
+
+        this.filtersHTML.append(this.filtersControls);
 
         this.resetButton.setAttribute('id', 'reset-filters');
         this.resetButton.setAttribute('class', 'button');
@@ -144,7 +148,7 @@ export class FiltersV {
 
 
     listenFilters(handler: CallbackHandleFilters){
-        this.filtersHTML.addEventListener('change', (event) => {
+        this.filtersControls.addEventListener('change', (event) => {
 
             if (!event.target) throw new Error();
 

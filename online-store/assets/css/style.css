@@ -134,7 +134,7 @@ main {
     row-gap: 2rem;
 }
 
-.filters {
+.filters, .filters__controls {
     padding: 2rem;
     display: flex;
     flex-direction: column;
