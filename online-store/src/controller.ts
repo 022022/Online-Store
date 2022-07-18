@@ -298,6 +298,7 @@ class SortC {
 
 class PageC {
     pageModel;
+    coordY = 0;
 
     constructor(){
         this.pageModel = new PageM;
@@ -305,6 +306,9 @@ class PageC {
     }
 
     renderAppPage(){
+
+        this.saveScroll();
+
         const filters = new FiltersC;
         const products = new ProductsC;
         const cart = new CartC;
@@ -333,10 +337,22 @@ class PageC {
         search.setFocus();
 
         pageView.listenTotalReset(this.totalPageReset);
+
+        this.getScroll();
     }
 
     totalPageReset = ():void => {
         this.pageModel.totalReset();
+    }
+
+    saveScroll(){
+        this.coordY = window.scrollY;
+        console.log('1',this.coordY)
+    }
+
+    getScroll(){
+        window.scroll(0, this.coordY);
+        console.log('2',this.coordY)
     }
 }
 
