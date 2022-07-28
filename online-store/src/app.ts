@@ -1,7 +1,7 @@
 import '../assets/css/style.css';
 import { PageC } from './controller/pagec';
 
-export const app = new PageC;
+export const app = new PageC();
 
 console.log(`
 
@@ -24,5 +24,4 @@ Score: 220/220
 -[x] Сброс фильтров +20
 -[x] Сохранение настроек в local storage +30
 -[x] Поиск +30
-`
-)
+`);

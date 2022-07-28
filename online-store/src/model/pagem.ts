@@ -1,10 +1,10 @@
 export class PageM {
     searchWord;
-    constructor(){
+    constructor() {
         this.searchWord = '';
     }
 
-    totalReset(){
+    totalReset() {
         localStorage.clear();
         location.reload();
     }

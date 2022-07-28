@@ -1,146 +1,145 @@
 import { FiltersGroupObj } from '../types/types';
 
-
 export const filtersConfig: Array<FiltersGroupObj> = [
     {
-        filtersGroupName: "Released",
+        filtersGroupName: 'Released',
         filters: [
             {
-                filterType: "range",
-                id: "released",
+                filterType: 'range',
+                id: 'released',
                 state: '2021',
                 filterAttrs: {
-                    min: "2016",
-                    step: "1",
-                    max: "2021",
-                    valueFrom: "2016",
-                    valueTo: "2021",
-                }
+                    min: '2016',
+                    step: '1',
+                    max: '2021',
+                    valueFrom: '2016',
+                    valueTo: '2021',
+                },
             },
-        ]
+        ],
     },
 
     {
-        filtersGroupName: "In Stock",
+        filtersGroupName: 'In Stock',
         filters: [
             {
-                id: "instock",
-                filterType: "range",
+                id: 'instock',
+                filterType: 'range',
                 state: '8',
                 filterAttrs: {
-                    min: "0",
-                    step: "1",
-                    max: "12",
-                    valueFrom: "0",
-                    valueTo: "12",
-                }
+                    min: '0',
+                    step: '1',
+                    max: '12',
+                    valueFrom: '0',
+                    valueTo: '12',
+                },
             },
-        ]
+        ],
     },
 
     {
-        filtersGroupName: "Brand",
+        filtersGroupName: 'Brand',
         filters: [
             {
-                id: "brand-huawei",
-                filterType: "checkbox",
+                id: 'brand-huawei',
+                filterType: 'checkbox',
                 state: 'off',
                 filterAttrs: {
-                    name: "huawei",
-                }
+                    name: 'huawei',
+                },
             },
             {
-                id: "brand-lenovo",
-                filterType: "checkbox",
+                id: 'brand-lenovo',
+                filterType: 'checkbox',
                 state: 'off',
                 filterAttrs: {
-                    name: "lenovo",
-                }
+                    name: 'lenovo',
+                },
             },
             {
-                id: "brand-xiaomi",
-                filterType: "checkbox",
+                id: 'brand-xiaomi',
+                filterType: 'checkbox',
                 state: 'off',
                 filterAttrs: {
-                    name: "xiaomi",
-                }
+                    name: 'xiaomi',
+                },
             },
-        ]
+        ],
     },
 
     {
-        filtersGroupName: "Color",
+        filtersGroupName: 'Color',
         filters: [
             {
-                id: "color-red",
-                filterType: "checkbox",
+                id: 'color-red',
+                filterType: 'checkbox',
                 state: 'off',
                 filterAttrs: {
-                    name: "color-red",
-                }
+                    name: 'color-red',
+                },
             },
             {
-                id: "color-black",
-                filterType: "checkbox",
+                id: 'color-black',
+                filterType: 'checkbox',
                 state: 'off',
                 filterAttrs: {
-                    name: "color-black",
-                }
+                    name: 'color-black',
+                },
             },
             {
-                id: "color-blue",
-                filterType: "checkbox",
+                id: 'color-blue',
+                filterType: 'checkbox',
                 state: 'off',
                 filterAttrs: {
-                    name: "color-blue",
-                }
+                    name: 'color-blue',
+                },
             },
             {
-                id: "color-green",
-                filterType: "checkbox",
+                id: 'color-green',
+                filterType: 'checkbox',
                 state: 'off',
                 filterAttrs: {
-                    name: "color-green",
-                }
+                    name: 'color-green',
+                },
             },
             {
-                id: "color-pink",
-                filterType: "checkbox",
+                id: 'color-pink',
+                filterType: 'checkbox',
                 state: 'off',
                 filterAttrs: {
-                    name: "color-pink",
-                }
+                    name: 'color-pink',
+                },
             },
-        ]
+        ],
     },
 
     {
-        filtersGroupName: "Band Material",
+        filtersGroupName: 'Band Material',
         filters: [
             {
-                id: "bandmaterial-plastic",
-                filterType: "checkbox",
+                id: 'bandmaterial-plastic',
+                filterType: 'checkbox',
                 state: 'off',
                 filterAttrs: {
-                    name: "bandmaterial-plastic",
-                }
+                    name: 'bandmaterial-plastic',
+                },
             },
             {
-                id: "bandmaterial-silicone",
-                filterType: "checkbox",
+                id: 'bandmaterial-silicone',
+                filterType: 'checkbox',
                 state: 'off',
                 filterAttrs: {
-                    name: "bandmaterial-silicone",
-                }
+                    name: 'bandmaterial-silicone',
+                },
             },
             {
-                id: "bandmaterial-rubber",
-                filterType: "checkbox",
+                id: 'bandmaterial-rubber',
+                filterType: 'checkbox',
                 state: 'off',
                 filterAttrs: {
-                    name: "bandmaterial-rubber",
-                }
+                    name: 'bandmaterial-rubber',
+                },
             },
-        ]
+        ],
     },
-]
+];

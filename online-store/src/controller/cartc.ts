@@ -1,7 +1,7 @@
 import { CartV } from '../view/cartv';
 import { CartM } from '../model/cartm';
 import { app } from '../app';
-
+import { CARTMAXIMUM } from '../constants';
 
 export class CartC {
     cartHTML: Element;
@@ -10,22 +10,19 @@ export class CartC {
     cartQuantity;
     inCart;
 
-    constructor(){
-        this.cartModel = new CartM;
+    constructor() {
+        this.cartModel = new CartM();
         this.cartQuantity = this.cartModel.quantity;
         this.inCart = this.cartModel.inCart;
         this.cartView = new CartV(this.cartQuantity);
         this.cartHTML = this.cartView.cartHTML;
     }
 
-
     handleCart = (itemId: string): void => {
+        const [ action, id ] = itemId.split('-');
 
-        const action = itemId.split('-')[0];
-        const id = itemId.split('-')[1];
-
-        if(action === 'add'){
-            if (this.cartQuantity < 20){
+        if (action === 'add') {
+            if (this.cartQuantity < CARTMAXIMUM) {
                 this.cartModel.addToCart(id);
                 app.renderAppPage();
             } else {
@@ -33,13 +30,13 @@ export class CartC {
             }
         }
 
-        if(action === 'remove'){
+        if (action === 'remove') {
             this.cartModel.removeFromCart(id);
             app.renderAppPage();
         }
-    }
+    };
 
-    addCartListeners(){
+    addCartListeners() {
         this.cartView.listenAddToCart(this.handleCart);
     }
 }

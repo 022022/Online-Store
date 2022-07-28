@@ -238,5 +238,4 @@ export const productsConfig = [
         instock: '1',
         incart: 'no',
     },
-
-]
+];

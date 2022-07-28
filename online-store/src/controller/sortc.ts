@@ -1,7 +1,6 @@
-
 import { SortV } from '../view/sortv';
 import { app } from '../app';
-import { SortM } from '../model/sortm'
+import { SortM } from '../model/sortm';
 
 export class SortC {
     sortView;
@@ -9,7 +8,7 @@ export class SortC {
     sortHTML;
     sortOrder;
     constructor() {
-        this.sortModel = new SortM;
+        this.sortModel = new SortM();
         this.sortOrder = this.sortModel.sortOrder;
 
         this.sortView = new SortV(this.sortOrder);
@@ -20,5 +19,5 @@ export class SortC {
     handleSort = (sorting: string): void => {
         this.sortModel.update(sorting);
         app.renderAppPage();
-    }
+    };
 }

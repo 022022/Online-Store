@@ -3,11 +3,11 @@ import { CallbackSearch } from '../types/types';
 export class SearchV {
     searchHTML;
     searchField;
-    constructor(searchWord: string){
+    constructor(searchWord: string) {
         this.searchHTML = document.createElement('div');
         this.searchField = document.createElement('input');
 
-        if(searchWord){
+        if (searchWord) {
             this.searchField.value = searchWord;
         }
 
@@ -18,18 +18,16 @@ export class SearchV {
         this.searchField.setAttribute('class', 'search');
 
         this.searchHTML.append(this.searchField);
-
     }
 
     listenSearch(handler: CallbackSearch) {
         this.searchHTML.addEventListener('input', (event) => {
-            if (!event.target) throw new Error;
             const searchWord = (event.target as HTMLInputElement).value;
             handler(searchWord);
         });
     }
 
-    setFocus(){
+    setFocus() {
         this.searchField.focus();
     }
 }

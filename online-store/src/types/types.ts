@@ -12,6 +12,13 @@ export interface SingleFilterObj {
 
 export interface AttrsObj {
     [key: string]: string;
+    /* min: string,
+    step: string,
+    max: string,
+    valueFrom: string,
+    valueTo: string,
+    name:  string,
+    */
 }
 
 export interface CallbackHandleFilters {
@@ -34,6 +41,15 @@ export interface CallbackSort {
     (id: string): void;
 }
 
-export interface ProductsObj{
+export interface ProductsObj {
+    id: string,
+    name: string,
+    brand: string,
+    color: string,
+    url: string,
+    bandmaterial: string,
+    released: string,
+    instock: string,
+    incart: string,
     [key: string]: string;
 }

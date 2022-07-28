@@ -11,19 +11,18 @@ export class PageC {
     pageModel;
     coordY = 0;
 
-    constructor(){
-        this.pageModel = new PageM;
+    constructor() {
+        this.pageModel = new PageM();
         this.renderAppPage();
     }
 
-    renderAppPage(){
-
+    renderAppPage() {
         this.saveScroll();
 
-        const filters = new FiltersC;
-        const products = new ProductsC;
-        const cart = new CartC;
-        const sort = new SortC;
+        const filters = new FiltersC();
+        const products = new ProductsC();
+        const cart = new CartC();
+        const sort = new SortC();
 
         const search = new SearchC(this.pageModel.searchWord);
         const searchHTML = search.searchHTML;
@@ -32,15 +31,17 @@ export class PageC {
         const cartHTML = cart.cartHTML;
         const sortHTML = sort.sortHTML;
 
-
-        const arrangedProducts = products.arrangeProducts(filters.filters,
-                                            products.products, cart.inCart, sort.sortOrder, this.pageModel.searchWord);
+        const arrangedProducts = products.arrangeProducts(
+            filters.filters,
+            products.products,
+            cart.inCart,
+            sort.sortOrder,
+            this.pageModel.searchWord
+        );
 
         const productsHTML = products.getHTML(arrangedProducts);
 
-        //console.log(this.filters.filters, this.products.products);
-
-        const pageView = new PageV;
+        const pageView = new PageV();
         pageView.renderWholePage(filtersHTML, productsHTML, cartHTML, searchHTML, sortHTML);
 
         cart.addCartListeners();
@@ -52,15 +53,15 @@ export class PageC {
         this.getScroll();
     }
 
-    totalPageReset = ():void => {
+    totalPageReset = (): void => {
         this.pageModel.totalReset();
-    }
+    };
 
-    saveScroll(){
+    saveScroll() {
         this.coordY = window.scrollY;
     }
 
-    getScroll(){
+    getScroll() {
         window.scroll(0, this.coordY);
     }
 }

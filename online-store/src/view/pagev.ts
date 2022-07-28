@@ -1,13 +1,11 @@
 import { CallbackLocalStorage } from '../types/types';
 
 export class PageV {
-
     footer;
     appName;
     totalResetButton;
 
     constructor() {
-
         this.appName = 'Smart Bands Store';
 
         this.totalResetButton = document.createElement('button');
@@ -15,19 +13,22 @@ export class PageV {
         this.totalResetButton.setAttribute('id', 'total-reset');
         this.totalResetButton.innerText = 'Total Reset';
 
-        this.footer =  `
+        this.footer = `
 
         <div class="copyright">2022</div>
             <a href="https://rs.school/js/"> <div class="logo"></div></a>
             <a href="https://github.com/022022">My GitHub</a>
 
-    `
-
+    `;
     }
 
-
-    renderWholePage(filtersHTML: Element, productsHTML: Element, cartHTML: Element, searchHTML: Element, sortHTML: Element) {
-
+    renderWholePage(
+        filtersHTML: Element,
+        productsHTML: Element,
+        cartHTML: Element,
+        searchHTML: Element,
+        sortHTML: Element
+    ) {
         (document.querySelector('body') as Element).innerHTML = '';
 
         const header = document.createElement('header');
@@ -43,19 +44,12 @@ export class PageV {
         actions.append(searchHTML);
         actions.append(sortHTML);
 
-
         const main = document.createElement('main');
         main.append(filtersHTML, actions, productsHTML);
-        //mainHTML.append(filtersHTML);
-        //mainHTML.append(productsHTML);
-
-
         document.body.append(header, main, footer);
-
     }
 
-    listenTotalReset(handler: CallbackLocalStorage){
+    listenTotalReset(handler: CallbackLocalStorage) {
         this.totalResetButton.addEventListener('click', (event) => handler());
     }
-
 }

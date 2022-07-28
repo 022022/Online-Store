@@ -3,8 +3,8 @@ export class CartM {
     quantity;
     inCart;
     constructor(){
-        if(localStorage.getItem('app-cart')){
-            const savedCart = localStorage.getItem('app-cart') as string;
+        const savedCart = localStorage.getItem('app-cart');
+        if(savedCart){
             this.inCart = JSON.parse(savedCart);
             this.quantity = this.inCart.length;
 
@@ -15,16 +15,21 @@ export class CartM {
         }
     }
 
-    addToCart(id: string) {  // saves to local storage
-        let cart = JSON.parse(localStorage.getItem('app-cart') as string);
-        cart.push(id);
-        localStorage.setItem('app-cart', JSON.stringify(cart));
+    addToCart(id: string) {
+        const savedCart = localStorage.getItem('app-cart');
+        if(savedCart){
+            const cart = JSON.parse(savedCart);
+            cart.push(id);
+            localStorage.setItem('app-cart', JSON.stringify(cart));
+        }
     }
 
     removeFromCart(id: string) {
-        const cart = JSON.parse(localStorage.getItem('app-cart') as string);
-        const newCart = cart.filter((item: string) => item !== id);
-        localStorage.setItem('app-cart', JSON.stringify(newCart));
+        const savedCart = localStorage.getItem('app-cart');
+        if(savedCart){
+            const cart = JSON.parse(savedCart);
+            const newCart = cart.filter((item: string) => item !== id);
+            localStorage.setItem('app-cart', JSON.stringify(newCart));
+        }
     }
-
 }
