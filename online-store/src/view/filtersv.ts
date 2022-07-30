@@ -122,7 +122,7 @@ export class FiltersV {
     listenSliderToDrawMove() {
         const sliderWrappers = this.filtersHTML.querySelectorAll('.slider-wrapper');
         sliderWrappers.forEach((wrapper) =>
-            wrapper.addEventListener('input', (event) => {
+            wrapper.addEventListener('input', () => {
                 const from = wrapper.children[0] as HTMLInputElement;
                 const to = wrapper.children[1] as HTMLInputElement;
 

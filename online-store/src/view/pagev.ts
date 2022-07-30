@@ -50,6 +50,6 @@ export class PageV {
     }
 
     listenTotalReset(handler: CallbackLocalStorage) {
-        this.totalResetButton.addEventListener('click', (event) => handler());
+        this.totalResetButton.addEventListener('click', () => handler());
     }
 }

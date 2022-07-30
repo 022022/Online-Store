@@ -1,14 +1,14 @@
-import { ProductsM } from '../model/productm';
-
-import { ProductsV } from '../view/productsv';
-import { FiltersGroupObj, ProductsObj, SingleFilterObj } from '../types/types';
+import { FiltersGroupObj, ProductsObj, ProductsModel, ProductsView } from '../types/types';
 
 export class ProductsC {
-    productsModel = new ProductsM();
+    productsModel;
+    productsView;
     products: Array<ProductsObj>;
 
-    constructor() {
+    constructor(productsModel: ProductsModel, productsView: ProductsView) {
+        this.productsModel = productsModel;
         this.products = this.productsModel.products;
+        this.productsView = productsView;
     }
 
     arrangeProducts(
@@ -120,7 +120,7 @@ export class ProductsC {
     }
 
     getHTML(arrangedProducts: Array<ProductsObj>) {
-        const productsView = new ProductsV(arrangedProducts);
-        return productsView.productsHTML;
+        this.productsView.render(arrangedProducts);
+        return this.productsView.productsHTML;
     }
 }

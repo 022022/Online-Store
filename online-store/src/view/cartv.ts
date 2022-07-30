@@ -1,18 +1,26 @@
 import { CallbackAddToCart } from '../types/types';
+import { CARTMAXIMUM } from '../constants';
 
 export class CartV {
     cartHTML: Element;
     warning;
 
-    constructor(cartQuantity: number) {
+    constructor() {
         this.cartHTML = document.createElement('div');
-        this.cartHTML.setAttribute('class', 'cart');
-        this.cartHTML.innerHTML = `${cartQuantity} items in Cart`;
-
         this.warning = document.createElement('div');
-        this.warning.setAttribute('class', 'pop-up');
-        this.warning.innerHTML = `Sorry, you have added maximum (20 products). Click to close`;
+    }
 
+    createCart(cartQuantity: number){
+
+        this.cartHTML.setAttribute('class', 'cart');
+        const cartStats = document.createElement('div');
+        cartStats.setAttribute('class', 'cart-stats');
+        cartStats.innerHTML = `${cartQuantity} items in Cart`;
+
+        this.warning.setAttribute('class', 'pop-up');
+        this.warning.innerHTML = `Sorry, you have added maximum (${CARTMAXIMUM} products). Click to close`;
+
+        this.cartHTML.append(cartStats);
         this.cartHTML.append(this.warning);
     }
 

@@ -1,7 +1,11 @@
 import '../assets/css/style.css';
 import { PageC } from './controller/pagec';
 
-export const app = new PageC();
+export function app(){
+    new PageC();
+}
+
+app();
 
 console.log(`
 

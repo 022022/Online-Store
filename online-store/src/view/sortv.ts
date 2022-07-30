@@ -9,8 +9,11 @@ export class SortV {
         { value: 'released-old', text: 'Year Released (oldest first)' },
     ];
 
-    constructor(sorting: string) {
+    constructor() {
         this.sortHTML = document.createElement('div');
+    }
+
+    renderSorting (sorting: string) {
         const sortField = document.createElement('select');
         sortField.setAttribute('class', 'sort');
 

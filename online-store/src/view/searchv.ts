@@ -3,10 +3,12 @@ import { CallbackSearch } from '../types/types';
 export class SearchV {
     searchHTML;
     searchField;
-    constructor(searchWord: string) {
+    constructor() {
         this.searchHTML = document.createElement('div');
         this.searchField = document.createElement('input');
+    }
 
+    renderSearch(searchWord: string) {
         if (searchWord) {
             this.searchField.value = searchWord;
         }

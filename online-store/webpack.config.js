@@ -1,15 +1,17 @@
 const path = require('path');
+const { merge } = require('webpack-merge');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CopyPlugin = require("copy-webpack-plugin");
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const EslintPlugin = require('eslint-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 
-module.exports = {
+const baseConfig = {
     entry: path.resolve(__dirname, './src/app'),
-    mode: 'production',
+    mode: 'development',
     module: {
-    rules: [
-
+        rules: [
             {
-                test: /\.ts$/,
+                test: /\.ts$/i,
                 use: 'ts-loader',
                 include: [path.resolve(__dirname, './src')],
             },
@@ -33,8 +35,20 @@ module.exports = {
         }),
         new CopyPlugin({
             patterns: [
-              { from: path.resolve(__dirname, './assets/images'), to: path.resolve(__dirname, '../../public/images'), },
+                {
+                    from: path.resolve(__dirname, './assets/images'),
+                    to: path.resolve(__dirname, '../../public/images'),
+                },
             ],
         }),
+        new CleanWebpackPlugin(),
+        new EslintPlugin({ extensions: 'ts' }),
     ],
+};
+
+module.exports = ({ mode }) => {
+    const isProductionMode = mode === 'prod';
+    const envConfig = isProductionMode ? require('./webpack.prod.config') : require('./webpack.dev.config');
+
+    return merge(baseConfig, envConfig);
 };

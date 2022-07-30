@@ -4,8 +4,18 @@ import { SearchC } from '../controller/searchc';
 import { SortC } from '../controller/sortc';
 import { FiltersC } from '../controller/filterc';
 import { ProductsC } from '../controller/productsc';
-
+import { CartV } from '../view/cartv';
+import { CartM } from '../model/cartm';
+import { FiltersM } from '../model/filterm';
+import { FiltersV } from '../view/filtersv';
+import { ProductsM } from '../model/productm';
+import { ProductsV } from '../view/productsv';
+import { SortV } from '../view/sortv';
+import { SortM } from '../model/sortm';
+import { app } from '../app';
 import { PageM } from '../model/pagem';
+import { SearchV } from '../view/searchv';
+
 
 export class PageC {
     pageModel;
@@ -19,12 +29,13 @@ export class PageC {
     renderAppPage() {
         this.saveScroll();
 
-        const filters = new FiltersC();
-        const products = new ProductsC();
-        const cart = new CartC();
-        const sort = new SortC();
+        const filters = new FiltersC(new FiltersM(), new FiltersV(), app);
+        const products = new ProductsC(new ProductsM(), new ProductsV());
+        const cart = new CartC(new CartM(), new CartV(), app);
+        const sort = new SortC(new SortM, new SortV, this);
 
-        const search = new SearchC(this.pageModel.searchWord);
+        const search = new SearchC(this.pageModel.searchWord, this.pageModel, new SearchV, this);
+
         const searchHTML = search.searchHTML;
 
         const filtersHTML = filters.filtersHTML;
@@ -43,13 +54,9 @@ export class PageC {
 
         const pageView = new PageV();
         pageView.renderWholePage(filtersHTML, productsHTML, cartHTML, searchHTML, sortHTML);
-
         cart.addCartListeners();
-
         search.setFocus();
-
         pageView.listenTotalReset(this.totalPageReset);
-
         this.getScroll();
     }
 
@@ -64,4 +71,6 @@ export class PageC {
     getScroll() {
         window.scroll(0, this.coordY);
     }
+
+
 }

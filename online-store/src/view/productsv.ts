@@ -2,9 +2,8 @@ import { ProductsObj } from '../types/types';
 
 export class ProductsV {
     productsHTML;
-    constructor(arrangedProducts: Array<ProductsObj>) {
+    constructor() {
         this.productsHTML = document.createElement('div');
-        this.render(arrangedProducts);
     }
 
     render(arrangedProducts: Array<ProductsObj>) {

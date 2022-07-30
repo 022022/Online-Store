@@ -1,18 +1,17 @@
-import { FiltersM } from '../model/filterm';
-import { FiltersV } from '../view/filtersv';
-import { FiltersGroupObj } from '../types/types';
-import { app } from '../app';
-import { ON, OFF } from '../constants';
+import { FiltersGroupObj, FiltersModel, FiltersView, App } from '../types/types';
+import { STATE } from '../constants'
 
 export class FiltersC {
     filtersModel;
     filtersView;
     filtersHTML: Element;
     filters: Array<FiltersGroupObj>;
+    app;
 
-    constructor() {
-        this.filtersModel = new FiltersM();
-        this.filtersView = new FiltersV();
+    constructor(filtersModel: FiltersModel, filtersView: FiltersView, app: App) {
+        this.filtersModel = filtersModel;
+        this.filtersView = filtersView;
+        this.app = app;
 
         this.filters = this.filtersModel.filters;
         this.filtersHTML = this.filtersView.render(this.filters);
@@ -29,13 +28,13 @@ export class FiltersC {
                         case 'checkbox':
                             switch (filter.state) {
                                 case 'off':
-                                    filter.state = ON;
+                                    filter.state = STATE.on;
                                     break;
                                 case 'on':
-                                    filter.state = OFF;
+                                    filter.state = STATE.off;
                                     break;
                                 default:
-                                    filter.state = value;
+                                    filter.state = STATE.off;
                             }
                         break;
                         case 'range':
@@ -49,11 +48,15 @@ export class FiltersC {
         this.filtersModel.filters = this.filters;
         this.filtersModel.saveToLocalStorage();
 
-        app.renderAppPage();
+        this.newRender();
     };
 
     resetFilters = () => {
         this.filtersModel.removeFromLocalStorage();
-        app.renderAppPage();
+        this.newRender();
     };
+
+    newRender(){
+        this.app();
+    }
 }
