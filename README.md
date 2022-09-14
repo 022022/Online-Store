@@ -7,11 +7,12 @@ This is a task for the Rolling Scopes School
 
 **Deploy**
 
-
+https://022022.github.io/Online-Store/
 
 
 **Task**
 https://github.com/rolling-scopes-school/tasks/tree/master/tasks/online-store
+
 
 **Requirements met**
 
@@ -35,3 +36,8 @@ https://github.com/rolling-scopes-school/tasks/tree/master/tasks/online-store
 - [x] карточки товаров добавляются динамически средствами JavaScript +10
 - [x] у ментора нет замечаний к качеству кода, либо все замечания ментора исправлены +30
 - [x] Тесты в приложении +20
+
+
+**Code**
+
+https://github.com/022022/Online-Store
