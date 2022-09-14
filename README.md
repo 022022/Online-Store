@@ -1,4 +1,4 @@
-#Online Store#
+# Online Store #
 
 This is a task for the Rolling Scopes School
 
