@@ -13,7 +13,7 @@ https://022022.github.io/Online-Store/
 
 **Task**
 
-https://github.com/rolling-scopes-school/tasks/tree/master/tasks/online-store
+https://github.com/022022/Online-Store/blob/main/CompleteTaskDescription.md
 
 
 
