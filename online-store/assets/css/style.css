@@ -275,7 +275,7 @@ input, label, button {
   background-color: #000000b3;
 
   animation-name: overlay;
-  animation-duration: 1s;
+  animation-duration: .3s;
 }
 
 .cart-panel__content {
@@ -290,7 +290,8 @@ input, label, button {
   transform: translate(0);
 
   animation-name: panel;
-  animation-duration: 1s;
+  animation-duration: .3s;
+  animation-timing-function: ease-out;
 }
 
 
@@ -317,7 +318,6 @@ input, label, button {
 
 .cart-panel__close {
   animation-name: close-overlay;
-  animation-duration: 1s;
 }
 
 @keyframes close-overlay {
@@ -327,7 +327,6 @@ input, label, button {
 
 .cart-panel__close .cart-panel__content{
   animation-name: close-panel;
-  animation-duration: 1s;
 }
 
 @keyframes close-panel {

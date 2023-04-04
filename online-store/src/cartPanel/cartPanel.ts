@@ -58,6 +58,7 @@ export class CartPanel {
   }
 
   wrapProduct = (product: ProductsObj) => {
+    const productsNumber = Number(product.quantity);
     const productSum = Number(product.quantity) * Number(product.price);
     const productWrapper = document.createElement('div');
 
@@ -91,7 +92,7 @@ export class CartPanel {
 
     productWrapper.append(productImg, name, price, counter, remover);
 
-    return {productWrapper, productSum};
+    return {productWrapper, productSum, productsNumber};
   }
 
   setUpCartPanel = () => {
@@ -104,6 +105,7 @@ export class CartPanel {
     const closeButton = document.createElement('div');
 
     const heading = document.createElement('h2');
+    heading.textContent = 'Your Cart';
 
     const productsWrapper = document.createElement('div');
 
@@ -117,21 +119,29 @@ export class CartPanel {
     }
 
     let sum = 0;
+    let counter = 0;
 
     for(const product of productsInfo) {
-      const {productWrapper, productSum} = this.wrapProduct(product);
+      const {productWrapper, productSum, productsNumber} = this.wrapProduct(product);
       productsWrapper.append(productWrapper);
       sum += productSum;
+      counter += productsNumber;
     }
 
     const total = document.createElement('div');
-    total.textContent = sum.toFixed(2);
+    total.textContent = `${counter} | $${sum.toFixed(2)}`;
 
+    const clearBlock = document.createElement('div');
+    if(this.inCart.length > 0){
+      const clearBtn = document.createElement('button');
+      clearBtn.textContent = 'Clear cart';
+      clearBtn.addEventListener('click', this.clearCart)
+      clearBlock.append(clearBtn);
+    } else {
+      clearBlock.textContent = 'Nothing in your cart yet'
+    }
 
-    const clearBtn = document.createElement('button');
-    clearBtn.textContent = 'Clear cart';
-
-    this.cartPanelHTML.append(closeButton, heading, productsWrapper, total, clearBtn);
+    this.cartPanelHTML.append(closeButton, heading, productsWrapper, total, clearBlock);
 
     this.cartPanelOverlay.addEventListener('click', (event) =>  {
       if((event?.target as HTMLElement).classList.contains('cart-panel__overlay')){
@@ -152,6 +162,16 @@ export class CartPanel {
   updateQuantity = (id: string, quantity: number) => {
     this.inCartQuantity[id] = quantity;
     localStorage.setItem('app-cart-quantity', JSON.stringify(this.inCartQuantity));
+
+    this.setUpCartPanel();
+  }
+
+  clearCart = () => {
+    localStorage.setItem('app-cart-quantity', '');
+
+    this.toBeRemoved.push(...this.inCart)
+    this.inCart = [];
+    this.inCartQuantity = { };
 
     this.setUpCartPanel();
   }
