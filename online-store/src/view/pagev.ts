@@ -34,9 +34,9 @@ export class PageV {
 
         const header = document.createElement('header');
         header.innerHTML = `<h1> ${this.appName} </h1>`;
-        header.append(this.totalResetButton);
-        header.append(cartPanelBtn);
         header.append(cartHTML);
+        header.append(cartPanelBtn);
+
 
         const footer = document.createElement('footer');
         footer.innerHTML = this.footer;
@@ -45,6 +45,7 @@ export class PageV {
         actions.setAttribute('class', 'actions');
         actions.append(searchHTML);
         actions.append(sortHTML);
+        actions.append(this.totalResetButton);
 
         const main = document.createElement('main');
         main.append(filtersHTML, actions, productsHTML);

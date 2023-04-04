@@ -12,8 +12,9 @@ export class CartPanel {
 
   constructor (app: App) {
     this.app = app;
-    this.cartPanelBtn = document.createElement('div');
+    this.cartPanelBtn = document.createElement('button');
     this.cartPanelBtn.textContent = 'Open Cart';
+    this.cartPanelBtn.classList.add('button');
 
     const savedCart = localStorage.getItem('app-cart');
     if(savedCart){
@@ -60,7 +61,9 @@ export class CartPanel {
   wrapProduct = (product: ProductsObj) => {
     const productsNumber = Number(product.quantity);
     const productSum = Number(product.quantity) * Number(product.price);
+
     const productWrapper = document.createElement('div');
+    productWrapper.classList.add('cart-panel__product');
 
     const productImg = document.createElement('img');
     productImg.setAttribute('src', `./images/${product.url}.jpg`);
@@ -84,6 +87,7 @@ export class CartPanel {
     });
 
     const remover = document.createElement('button');
+    remover.className = 'secondary-button secondary-button-sm';
     remover.setAttribute('id', product.id);
     remover.textContent = 'Remove';
     remover.addEventListener('click', (event) => {
@@ -102,10 +106,10 @@ export class CartPanel {
         this.inCartQuantity = JSON.parse(savedCartQuantity);
     }
 
-    const closeButton = document.createElement('div');
-
-    const heading = document.createElement('h2');
-    heading.textContent = 'Your Cart';
+    const closeButton = document.createElement('button');
+    closeButton.textContent = "Close";
+    closeButton.className = 'secondary-button secondary-button-sm';
+    closeButton.addEventListener('click', this.closeCartPanel)
 
     const productsWrapper = document.createElement('div');
 
@@ -129,17 +133,22 @@ export class CartPanel {
     }
 
     const total = document.createElement('div');
-    total.textContent = `${counter} | $${sum.toFixed(2)}`;
+    total.classList.add('cart-panel__total')
+    total.textContent = `$ ${sum.toFixed(2)}`;
 
     const clearBlock = document.createElement('div');
     if(this.inCart.length > 0){
       const clearBtn = document.createElement('button');
+      clearBtn.className = 'secondary-button secondary-button-sm';
       clearBtn.textContent = 'Clear cart';
       clearBtn.addEventListener('click', this.clearCart)
       clearBlock.append(clearBtn);
     } else {
       clearBlock.textContent = 'Nothing in your cart yet'
     }
+
+    const heading = document.createElement('h2');
+    heading.textContent = `Your Cart (${counter})`;
 
     this.cartPanelHTML.append(closeButton, heading, productsWrapper, total, clearBlock);
 

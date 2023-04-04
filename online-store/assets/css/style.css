@@ -124,6 +124,10 @@ footer .copyright:before {
 }
 
 
+.secondary-button-sm {
+  padding: 0.6rem 1rem 0.5rem;
+  font-size: 1.4rem;
+}
 
 main {
     display: grid;
@@ -292,13 +296,30 @@ input, label, button {
   animation-name: panel;
   animation-duration: .3s;
   animation-timing-function: ease-out;
+
+  padding: 20px;
+  box-sizing: border-box;
+  display: grid;
+  gap: 2rem;
+  align-items: start;
+  justify-content: center;
+  justify-items: center;
+  font-size: 1.4rem;
 }
 
 
 @media (min-width: 768px) {
   .cart-panel__content {
-    width: 400px;
+    width: 500px;
   }
+}
+
+.cart-panel__product {
+  display: grid;
+  grid-template-columns: 50px 1fr 1fr 40px auto;
+  align-items: center;
+  min-width: 340px;
+  gap: 10px;
 }
 
 .cart-panel__image {
@@ -332,4 +353,14 @@ input, label, button {
 @keyframes close-panel {
   from {transform: translate(0);}
   to {transform: translate(100%);}
+}
+
+
+.cart-panel__total {
+  font-size: 2.5rem;
+  font-weight: bold;
+  letter-spacing: 0.2rem;
+  border-top: medium dashed #3c8f5a;
+  padding: 1rem 0;
+  border-bottom: medium dashed #3c8f5a;
 }
