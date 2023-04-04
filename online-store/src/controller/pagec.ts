@@ -15,6 +15,7 @@ import { SortM } from '../model/sortm';
 import { app } from '../app';
 import { PageM } from '../model/pagem';
 import { SearchV } from '../view/searchv';
+import { CartPanel } from '../cartPanel/cartPanel';
 
 
 export class PageC {
@@ -35,12 +36,15 @@ export class PageC {
         const sort = new SortC(new SortM, new SortV, this);
 
         const search = new SearchC(this.pageModel.searchWord, this.pageModel, new SearchV, this);
+        const cartPanel = new CartPanel(app);
 
         const searchHTML = search.searchHTML;
 
         const filtersHTML = filters.filtersHTML;
         const cartHTML = cart.cartHTML;
         const sortHTML = sort.sortHTML;
+
+        const cartPanelBtn = cartPanel.cartPanelBtn;
 
         const arrangedProducts = products.arrangeProducts(
             filters.filters,
@@ -53,7 +57,7 @@ export class PageC {
         const productsHTML = products.getHTML(arrangedProducts);
 
         const pageView = new PageV();
-        pageView.renderWholePage(filtersHTML, productsHTML, cartHTML, searchHTML, sortHTML);
+        pageView.renderWholePage(filtersHTML, productsHTML, cartHTML, searchHTML, sortHTML, cartPanelBtn);
         cart.addCartListeners();
         search.setFocus();
         pageView.listenTotalReset(this.totalPageReset);

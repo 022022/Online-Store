@@ -15,7 +15,7 @@ export class CartV {
         this.cartHTML.setAttribute('class', 'cart');
         const cartStats = document.createElement('div');
         cartStats.setAttribute('class', 'cart-stats');
-        cartStats.innerHTML = `${cartQuantity} items in Cart`;
+        cartStats.innerHTML = `${cartQuantity}`;
 
         this.warning.setAttribute('class', 'pop-up');
         this.warning.innerHTML = `Sorry, you have added maximum (${CARTMAXIMUM} products). Click to close`;

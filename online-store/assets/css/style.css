@@ -261,3 +261,76 @@ input, label, button {
     outline: none;
     color: #3a7e52;
 }
+
+
+/* cart panel */
+
+.cart-panel__overlay {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 100;
+  background-color: #000000b3;
+
+  animation-name: overlay;
+  animation-duration: 1s;
+}
+
+.cart-panel__content {
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 200;
+  background: rgb(255, 255, 255);
+  overflow: auto;
+  transform: translate(0);
+
+  animation-name: panel;
+  animation-duration: 1s;
+}
+
+
+@media (min-width: 768px) {
+  .cart-panel__content {
+    width: 400px;
+  }
+}
+
+.cart-panel__image {
+  width: 50px;
+}
+
+@keyframes overlay {
+  from {background-color: #00000000;}
+  to {background-color: #000000b3;}
+}
+
+@keyframes panel {
+  from {transform: translate(100%);}
+  to {transform: translate(0);}
+}
+
+
+.cart-panel__close {
+  animation-name: close-overlay;
+  animation-duration: 1s;
+}
+
+@keyframes close-overlay {
+  from { background-color: #000000b3;}
+  to { background-color: #00000000;}
+}
+
+.cart-panel__close .cart-panel__content{
+  animation-name: close-panel;
+  animation-duration: 1s;
+}
+
+@keyframes close-panel {
+  from {transform: translate(0);}
+  to {transform: translate(100%);}
+}

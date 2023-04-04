@@ -27,14 +27,16 @@ export class PageV {
         productsHTML: Element,
         cartHTML: Element,
         searchHTML: Element,
-        sortHTML: Element
+        sortHTML: Element,
+        cartPanelBtn: Element
     ) {
         (document.querySelector('body') as Element).innerHTML = '';
 
         const header = document.createElement('header');
         header.innerHTML = `<h1> ${this.appName} </h1>`;
-        header.append(cartHTML);
         header.append(this.totalResetButton);
+        header.append(cartPanelBtn);
+        header.append(cartHTML);
 
         const footer = document.createElement('footer');
         footer.innerHTML = this.footer;
