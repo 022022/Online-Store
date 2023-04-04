@@ -1,6 +1,7 @@
 export const productsConfig = [
     {
         id: '1',
+        price: '10.38',
         name: 'Mi Band 2',
         brand: 'xiaomi',
         color: 'black',
@@ -12,6 +13,7 @@ export const productsConfig = [
     },
     {
         id: '2',
+        price: '10.08',
         name: 'Mi Band 2',
         brand: 'xiaomi',
         color: 'blue',
@@ -23,6 +25,7 @@ export const productsConfig = [
     },
     {
         id: '3',
+        price: '10.66',
         name: 'Mi Band 2',
         brand: 'xiaomi',
         color: 'green',
@@ -34,6 +37,7 @@ export const productsConfig = [
     },
     {
         id: '4',
+        price: '10.66',
         name: 'Mi Band 2',
         brand: 'xiaomi',
         color: 'black',
@@ -45,6 +49,7 @@ export const productsConfig = [
     },
     {
         id: '5',
+        price: '10.66',
         name: 'Mi Band 2',
         brand: 'xiaomi',
         color: 'blue',
@@ -56,6 +61,7 @@ export const productsConfig = [
     },
     {
         id: '6',
+        price: '10.66',
         name: 'Mi Band 2',
         brand: 'xiaomi',
         color: 'green',
@@ -68,6 +74,7 @@ export const productsConfig = [
 
     {
         id: '7',
+        price: '10.66',
         name: 'Mi Band 3',
         brand: 'xiaomi',
         color: 'black',
@@ -79,6 +86,7 @@ export const productsConfig = [
     },
     {
         id: '8',
+        price: '10.66',
         name: 'Mi Band 3',
         brand: 'xiaomi',
         color: 'red',
@@ -90,6 +98,7 @@ export const productsConfig = [
     },
     {
         id: '9',
+        price: '10.66',
         name: 'Mi Band 6',
         brand: 'xiaomi',
         color: 'black',
@@ -101,6 +110,7 @@ export const productsConfig = [
     },
     {
         id: '10',
+        price: '10.66',
         name: 'Mi Band 6',
         brand: 'xiaomi',
         color: 'blue',
@@ -112,6 +122,7 @@ export const productsConfig = [
     },
     {
         id: '11',
+        price: '10.66',
         name: 'Mi Band 6',
         brand: 'xiaomi',
         color: 'pink',
@@ -123,6 +134,7 @@ export const productsConfig = [
     },
     {
         id: '12',
+        price: '10.66',
         name: 'Mi Band 6',
         brand: 'xiaomi',
         color: 'red',
@@ -135,6 +147,7 @@ export const productsConfig = [
 
     {
         id: '13',
+        price: '10.66',
         name: 'Lenovo S2',
         brand: 'lenovo',
         color: 'black',
@@ -147,6 +160,7 @@ export const productsConfig = [
 
     {
         id: '14',
+        price: '10.66',
         name: 'Band 6',
         brand: 'huawei',
         color: 'red',
@@ -159,6 +173,7 @@ export const productsConfig = [
 
     {
         id: '15',
+        price: '10.66',
         name: 'Band 6',
         brand: 'huawei',
         color: 'pink',
@@ -170,6 +185,7 @@ export const productsConfig = [
     },
     {
         id: '16',
+        price: '10.66',
         name: 'Band 6',
         brand: 'huawei',
         color: 'green',
@@ -181,6 +197,7 @@ export const productsConfig = [
     },
     {
         id: '17',
+        price: '10.66',
         name: 'Band 6',
         brand: 'huawei',
         color: 'red',
@@ -193,6 +210,7 @@ export const productsConfig = [
 
     {
         id: '18',
+        price: '10.66',
         name: 'Band 4 Pro',
         brand: 'huawei',
         color: 'black',
@@ -205,6 +223,7 @@ export const productsConfig = [
 
     {
         id: '19',
+        price: '10.66',
         name: 'Band 4 Pro',
         brand: 'huawei',
         color: 'pink',
@@ -217,6 +236,7 @@ export const productsConfig = [
 
     {
         id: '20',
+        price: '10.66',
         name: 'Band 4 Pro',
         brand: 'huawei',
         color: 'pink',
@@ -229,6 +249,7 @@ export const productsConfig = [
 
     {
         id: '21',
+        price: '10.66',
         name: 'Band 4 Pro',
         brand: 'huawei',
         color: 'pink',

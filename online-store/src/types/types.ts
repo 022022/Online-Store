@@ -36,6 +36,7 @@ export interface CallbackSort {
 
 export interface ProductsObj {
     id: string;
+    price: string;
     name: string;
     brand: string;
     color: string;
