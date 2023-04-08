@@ -1,5 +1,6 @@
 import { productsConfig } from '../data/products';
 import { App, ProductsObj } from '../types/types';
+import { makeElements } from './makeElement';
 
 export class CartPanel {
   cartPanelBtn;
@@ -12,9 +13,9 @@ export class CartPanel {
 
   constructor (app: App) {
     this.app = app;
-    this.cartPanelBtn = document.createElement('button');
-    this.cartPanelBtn.textContent = 'Open Cart';
-    this.cartPanelBtn.classList.add('button');
+
+    this.cartPanelBtn = makeElements('button', {classes: 'button cart-panel__open', text: 'Open Cart'})
+    this.cartPanelBtn.addEventListener('click', this.openCartPanel);
 
     const savedCart = localStorage.getItem('app-cart');
     if(savedCart){
@@ -25,18 +26,14 @@ export class CartPanel {
     }
     this.toBeRemoved = [];
 
-    this.cartPanelBtn.classList.add('cart-panel__open');
-    this.cartPanelBtn.addEventListener('click', this.openCartPanel);
     this.inCartQuantity = {};
-    this.cartPanelOverlay = document.createElement('div');
-    this.cartPanelHTML = document.createElement('div');
+    this.cartPanelOverlay = makeElements('div', {});
+    this.cartPanelHTML = makeElements('div', {});
   }
 
   openCartPanel = () => {
-    this.cartPanelOverlay = document.createElement('div');
-    this.cartPanelOverlay.classList.add('cart-panel__overlay');
-    this.cartPanelHTML = document.createElement('div');
-    this.cartPanelHTML.classList.add('cart-panel__content');
+    this.cartPanelOverlay = makeElements('div', {classes: 'cart-panel__overlay'});
+    this.cartPanelHTML = makeElements('div', {classes: 'cart-panel__content'});
 
     this.setUpCartPanel();
 
@@ -62,34 +59,30 @@ export class CartPanel {
     const productsNumber = Number(product.quantity);
     const productSum = Number(product.quantity) * Number(product.price);
 
-    const productWrapper = document.createElement('div');
-    productWrapper.classList.add('cart-panel__product');
+    const productWrapper = makeElements('div', {classes: 'cart-panel__product'});
 
-    const productImg = document.createElement('img');
-    productImg.setAttribute('src', `./images/${product.url}.jpg`);
-    productImg.classList.add('cart-panel__image');
+    const productImg = makeElements('img', {
+      attributes: {src: `./images/${product.url}.jpg`},
+      classes: 'cart-panel__image'});
 
-    const name = document.createElement('h3');
-    name.textContent = product.name;
+    const name = makeElements('h3', {text: product.name});
 
-    const price = document.createElement('p');
-    price.textContent = product.price;
+    const price = makeElements('p', {text: product.price});
 
-    const counter = document.createElement('input');
-    counter.setAttribute('type', 'number');
-    counter.setAttribute('min', '1');
-    counter.setAttribute('max', product.instock);
-    counter.setAttribute('id', product.id);
-    counter.setAttribute('value', String(product.quantity));
+    const counter = makeElements('input', {attributes:
+      {'type':'number', 'min': '1', 'max': product.instock,
+      'id': product.id, 'value': String(product.quantity) }});
+
     counter.addEventListener('click', (e) => {
       this.updateQuantity((e?.target as HTMLInputElement).id,
         Number((e?.target as HTMLInputElement).value));
     });
 
-    const remover = document.createElement('button');
-    remover.className = 'secondary-button secondary-button-sm';
-    remover.setAttribute('id', product.id);
-    remover.textContent = 'Remove';
+    const remover = makeElements('button', { attributes: {'id': product.id},
+      classes: 'secondary-button secondary-button-sm',
+      text: 'Remove'
+    })
+
     remover.addEventListener('click', (event) => {
       this.removeProduct((event?.target as HTMLElement).id)
     });
@@ -106,12 +99,10 @@ export class CartPanel {
         this.inCartQuantity = JSON.parse(savedCartQuantity);
     }
 
-    const closeButton = document.createElement('button');
-    closeButton.textContent = "Close";
-    closeButton.className = 'secondary-button secondary-button-sm';
+    const closeButton = makeElements('button', {classes: 'secondary-button secondary-button-sm', text: 'Close'});
     closeButton.addEventListener('click', this.closeCartPanel)
 
-    const productsWrapper = document.createElement('div');
+    const productsWrapper = makeElements('div', {});
 
     const productsInfo = [];
 
@@ -132,15 +123,11 @@ export class CartPanel {
       counter += productsNumber;
     }
 
-    const total = document.createElement('div');
-    total.classList.add('cart-panel__total')
-    total.textContent = `$ ${sum.toFixed(2)}`;
+    const total = makeElements('div', {classes: 'cart-panel__total', text: `$ ${sum.toFixed(2)}`});
 
-    const clearBlock = document.createElement('div');
+    const clearBlock = makeElements('div', {});
     if(this.inCart.length > 0){
-      const clearBtn = document.createElement('button');
-      clearBtn.className = 'secondary-button secondary-button-sm';
-      clearBtn.textContent = 'Clear cart';
+      const clearBtn = makeElements('button', {classes: 'secondary-button secondary-button-sm', text: 'Clear cart'});
       clearBtn.addEventListener('click', this.clearCart)
       clearBlock.append(clearBtn);
     } else {
