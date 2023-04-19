@@ -1,7 +1,7 @@
 export const productsConfig = [
     {
         id: '1',
-        price: '10.38',
+        price: '12.38',
         name: 'Mi Band 2',
         brand: 'xiaomi',
         color: 'black',
@@ -13,7 +13,7 @@ export const productsConfig = [
     },
     {
         id: '2',
-        price: '10.08',
+        price: '8.08',
         name: 'Mi Band 2',
         brand: 'xiaomi',
         color: 'blue',
@@ -147,7 +147,7 @@ export const productsConfig = [
 
     {
         id: '13',
-        price: '10.66',
+        price: '30.08',
         name: 'Lenovo S2',
         brand: 'lenovo',
         color: 'black',

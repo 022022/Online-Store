@@ -61,6 +61,12 @@ footer .copyright:before {
     width: 150px;
 }
 
+.product__price {
+  color: #3a7e52;
+  font-weight: normal;
+  font-size: 1.8rem;
+}
+
 .product__property {
     color: rgb(130, 130, 130);
 }
@@ -70,11 +76,19 @@ footer .copyright:before {
     font-weight: bold;
     padding-bottom: 1rem;
     font-size: 2rem;
-}
-
-.product__footer, .product__header {
     display: flex;
     justify-content: space-between;
+}
+
+.product__header {
+    display: flex;
+    gap: 1rem;
+}
+
+.product__footer {
+  display: flex;
+  justify-content: space-between;
+
 }
 
 .product__footer {
@@ -134,6 +148,7 @@ main {
     grid-template-areas: "filters actions"
                         "filters  products";
     grid-template-columns: 20rem 1fr;
+    grid-template-rows: 10rem;
     column-gap: 7rem;
     row-gap: 2rem;
 }

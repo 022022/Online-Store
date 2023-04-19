@@ -2,6 +2,23 @@ import { FiltersGroupObj } from '../types/types';
 
 export const filtersConfig: Array<FiltersGroupObj> = [
     {
+      filtersGroupName: 'Price',
+      filters: [
+          {
+              filterType: 'range',
+              id: 'price',
+              state: '10',
+              filterAttrs: {
+                  min: '2',
+                  step: '1',
+                  max: '40',
+                  valueFrom: '2',
+                  valueTo: '40',
+              },
+          },
+      ],
+  },
+    {
         filtersGroupName: 'Released',
         filters: [
             {

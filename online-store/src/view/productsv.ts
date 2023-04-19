@@ -23,7 +23,8 @@ export class ProductsV {
             productHeader.innerHTML = `
                 <img src="./images/${product.url}.jpg" class="product__image">
                 <div>
-                    <div class="product__name"> ${product.name} </div>
+                    <div class="product__name"> ${product.name} <span class="product__price">   $${product.price} </span></div>
+
 
                     <div > <span class="product__property">Band Material</span> ${product.bandmaterial} </div>
                     <div > <span class="product__property">Brand</span> ${product.brand} </div>
