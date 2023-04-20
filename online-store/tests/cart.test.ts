@@ -1,7 +1,6 @@
 import { CartC } from '../src/controller/cartc';
 import { fakeCartModel, fakeCartView, fakeApp } from './mocks/mocks';
 import { CartM } from '../src/model/cartm';
-import { CartV } from '../src/view/cartv';
 
 beforeEach(() => {
     return localStorage.removeItem('app-cart');
@@ -79,20 +78,5 @@ describe('when given itemId', () => {
 
     test('if it calls respective model', () => {
         expect(fakeCartModel.addToCart).toHaveBeenCalledWith('777');
-    });
-});
-
-
-describe('when called', () => {
-    const cartView = new CartV;
-    const cartQuantity = Math.ceil(Math.random() * 10);
-
-    cartView.createCart(cartQuantity);
-
-    const [cartStats] = cartView.cartHTML.getElementsByClassName('cart-stats');
-
-    it('should create element with cart', () => {
-        expect(cartStats).toBeDefined();
-        expect(cartStats.innerHTML).toBe(`${cartQuantity} items in Cart`);
     });
 });

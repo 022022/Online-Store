@@ -15,6 +15,7 @@ describe('when given products, filters and other settings', () => {
             color: 'black',
             url: 'xiaomi-mi-band-2-black',
             bandmaterial: 'silicone',
+            price: "12.38",
             released: '2016',
             instock: '12',
             incart: 'yes',
